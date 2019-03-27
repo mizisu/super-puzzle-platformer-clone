@@ -10,6 +10,7 @@ class Texture {
 
   int Width() { return width; }
   int Height() { return height; }
+  SDL_Texture* SDLTexture() { return texture; }
 
  private:
   SDL_Texture* texture;

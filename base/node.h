@@ -5,14 +5,18 @@
 
 class Node {
  public:
-  virtual void Update();
-  virtual void Render();
+  Node();
+  virtual ~Node();
+  
+  virtual void Update() = 0;
+  virtual void Render() = 0;
 
   void UpdateChildren();
   void RenderChildren();
+  void AddChild(std::shared_ptr<Node> child);
 
  private:
- std::vector<std::shared_ptr<Node>> children;
+  std::vector<std::shared_ptr<Node>> children;
 };
 
 #endif  // __NODE_H__

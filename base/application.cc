@@ -55,7 +55,7 @@ void Application::Close() {
 void Application::Run() {
   //TextureManager::GetInstance().LoadTexture("./res/image/play/background.png");
   //TextureManager::GetInstance().LoadTexture("./res/image/play/block/b1.png");
-
+  
   auto running = true;
   SDL_Event event;
   while (running) {
@@ -72,10 +72,6 @@ void Application::Run() {
     }
 
     SDL_RenderClear(Global::Renderer);
-    //SDL_Rect rect{0, 0, w, h};
-
-    //SDL_RenderCopy(Global::Renderer, TextureManager::GetInstance().texture,
-                   //NULL, &rect);
 
     SDL_RenderPresent(Global::Renderer);
 
