@@ -2,7 +2,7 @@
 #include "texture.h"
 #include "texture_manager.h"
 
-Sprite::Sprite(std::string& filename) {
+Sprite::Sprite(const std::string& filename) {
   texture = TextureManager::GetInstance().GetTexture(filename);
   destRect.x = 0;
   destRect.y = 0;

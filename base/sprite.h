@@ -8,7 +8,7 @@ class Texture;
 
 class Sprite : public Node {
  public:
-  Sprite(std::string& filename);
+  Sprite(const std::string& filename);
   virtual ~Sprite();
 
   virtual void Update() override;

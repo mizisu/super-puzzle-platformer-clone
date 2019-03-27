@@ -1,5 +1,8 @@
 #include "node.h"
 
+Node::Node() {}
+Node::~Node() {}
+
 void Node::UpdateChildren() {
   Update();
   for (auto node : children) {
@@ -14,6 +17,4 @@ void Node::RenderChildren() {
   }
 }
 
-void Node::AddChild(std::shared_ptr<Node> child) {
-  children.push_back(child);
-}
+void Node::AddChild(std::shared_ptr<Node> child) { children.push_back(child); }
