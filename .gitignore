@@ -2,5 +2,4 @@
 /.vscode/settings.json
 /build
 /builder/__pycache__
-/res
 .DS_Store

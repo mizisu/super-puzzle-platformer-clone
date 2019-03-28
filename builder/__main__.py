@@ -25,6 +25,7 @@ def main():
         subprocess.call([
             'clang++',
             '-std=c++17',
+            '-I' + os.getcwd(),
             '-g',
             '-c',
             file,

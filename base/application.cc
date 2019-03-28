@@ -1,6 +1,7 @@
 #include "application.h"
 #include "base.h"
 #include "scene_manager.h"
+#include "game/game_scene.h"
 
 Application::Application() {}
 
@@ -36,7 +37,7 @@ bool Application::Initialize() {
     Global::ScreenSurface = SDL_GetWindowSurface(window);
 
     scene_manager = std::make_unique<SceneManager>();
-    scene_manager->Push(nullptr);
+    scene_manager->Push(new GameScene());
 
     return true;
 

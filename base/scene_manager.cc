@@ -15,7 +15,7 @@ void SceneManager::Push(Scene* scene) {
 
 void SceneManager::Play() {
   if (current_scene) {
-    current_scene->Update();
-    current_scene->Render();
+    current_scene->UpdateChildren();
+    current_scene->RenderChildren();
   }
 }
