@@ -1,6 +1,6 @@
 #include "application.h"
 #include "base.h"
-#include "texture_manager.h"
+#include "scene_manager.h"
 
 Application::Application() {}
 
@@ -35,6 +35,9 @@ bool Application::Initialize() {
     Global::Renderer = renderer;
     Global::ScreenSurface = SDL_GetWindowSurface(window);
 
+    scene_manager = std::make_unique<SceneManager>();
+    scene_manager->Push(nullptr);
+
     return true;
 
   } catch (const std::string& error) {
@@ -53,9 +56,7 @@ void Application::Close() {
 }
 
 void Application::Run() {
-  //TextureManager::GetInstance().LoadTexture("./res/image/play/background.png");
-  //TextureManager::GetInstance().LoadTexture("./res/image/play/block/b1.png");
-  
+
   auto running = true;
   SDL_Event event;
   while (running) {
@@ -72,9 +73,8 @@ void Application::Run() {
     }
 
     SDL_RenderClear(Global::Renderer);
-
+    scene_manager->Play();
     SDL_RenderPresent(Global::Renderer);
-
     SDL_Delay(16);
   }
 }

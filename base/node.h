@@ -8,13 +8,14 @@ class Node {
   Node();
   virtual ~Node();
   
-  virtual void Update() = 0;
-  virtual void Render() = 0;
+  virtual void Update();
+  virtual void Render();
 
   void UpdateChildren();
   void RenderChildren();
   void AddChild(std::shared_ptr<Node> child);
-
+  void Clear();
+  
  private:
   std::vector<std::shared_ptr<Node>> children;
 };

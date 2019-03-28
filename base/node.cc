@@ -1,7 +1,10 @@
 #include "node.h"
 
 Node::Node() {}
-Node::~Node() {}
+Node::~Node() { Clear(); }
+
+void Node::Update() {}
+void Node::Render() {}
 
 void Node::UpdateChildren() {
   Update();
@@ -18,3 +21,5 @@ void Node::RenderChildren() {
 }
 
 void Node::AddChild(std::shared_ptr<Node> child) { children.push_back(child); }
+
+void Node::Clear() { children.clear(); }

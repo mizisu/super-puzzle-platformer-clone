@@ -12,6 +12,14 @@ extern SDL_Renderer* Renderer;
 
 void Log(const std::string_view& str);
 
-}  // namespace Global
+template <typename T>
+void SafeDelete(T* obj) {
+  if (obj) {
+    delete obj;
+    obj = nullptr;
+  }
+}
 
-#endif // __GLOBAL_H__
+};  // namespace Global
+
+#endif  // __GLOBAL_H__
