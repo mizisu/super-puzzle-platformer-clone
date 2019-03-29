@@ -13,6 +13,14 @@ class Sprite : public Node {
   virtual void Update() override;
   virtual void Render() override;
 
+  void SetPosition(int x, int y) {
+    destRect.x = x;
+    destRect.y = y;
+  }
+
+  int Width() { return destRect.w; }
+  int Height() { return destRect.h; }
+
  private:
   std::shared_ptr<Texture> texture;
   SDL_Rect destRect;

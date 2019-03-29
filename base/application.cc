@@ -25,7 +25,7 @@ bool Application::Initialize() {
     auto renderer = SDL_CreateRenderer(
         window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
 
     SDL_RenderSetScale(renderer, 0.5f, 0.5f);
 

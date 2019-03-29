@@ -7,6 +7,9 @@ class GameScene : public Scene {
  public:
   GameScene();
   ~GameScene();
+
+ private:
+  void CreateBackground();
 };
 
 #endif // __GAME_SCENE_H__
