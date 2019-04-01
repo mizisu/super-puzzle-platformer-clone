@@ -11,5 +11,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "global.h"
+#include "random_generator.h"
+
 
 #endif  // __BASE_H__
