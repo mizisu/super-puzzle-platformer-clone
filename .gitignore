@@ -1,5 +1,5 @@
 /.vscode/ipch
 /.vscode/settings.json
 /build
-/builder/__pycache__
+__pycache__
 .DS_Store

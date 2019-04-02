@@ -1,12 +1,7 @@
 import os
 import subprocess
 from glob import glob
-
-
-def get_cc_files() -> list:
-    files_group = [glob(e, recursive=True) for e in ['./**/*.cc']]
-    files = [f for group in files_group for f in group]
-    return list(files)
+import builder.utils
 
 def clear_build_folder():
     for file in glob('./build/*'):
@@ -16,7 +11,7 @@ def main():
     clear_build_folder()
     if not os.path.isdir('./build'):
         os.mkdir('./build')
-    ccfiles = get_cc_files()
+    ccfiles = builder.utils.get_cc_files()
     objfiles = []
     for file in ccfiles:
         objfile = os.path.splitext(os.path.basename(file))[0]
@@ -43,4 +38,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    pass
+    
