@@ -7,6 +7,7 @@ class Texture;
 
 class Sprite : public Node {
  public:
+  Sprite();
   Sprite(const std::string& filename);
   virtual ~Sprite();
 
@@ -20,6 +21,8 @@ class Sprite : public Node {
 
   int Width() { return destRect.w; }
   int Height() { return destRect.h; }
+
+  void SetTexture(std::shared_ptr<Texture> texture);
 
  private:
   std::shared_ptr<Texture> texture;
