@@ -27,9 +27,8 @@ Block::Block() : life(BlockLife) {
   block_images.push_back(
       TextureManager::GetInstance().GetTexture(image_file + "1.png"));
 
-  sprite = std::make_shared<Sprite>();
-  sprite->SetTexture(block_images[life]);
-  this->AddChild(sprite);
+  
+  this->SetTexture(block_images[life]);
 }
 
 Block::~Block() {}
@@ -40,5 +39,5 @@ void Block::Hit() {
     life = 0;
     return;
   }
-  sprite->SetTexture(block_images[life]);
+  this->SetTexture(block_images[life]);
 }

@@ -12,6 +12,7 @@
 
 #include "global.h"
 #include "random_generator.h"
+#include "timer.h"
 
 
 #endif  // __BASE_H__

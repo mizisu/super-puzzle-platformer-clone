@@ -1,7 +1,7 @@
 #ifndef __BLOCK_H__
 #define __BLOCK_H__
 
-#include "base/node.h"
+#include "base/sprite.h"
 
 class Sprite;
 class Texture;
@@ -13,7 +13,7 @@ enum class BlockType {
   Thorn,
 };
 
-class Block : public Node {
+class Block : public Sprite {
  public:
   Block();
   ~Block();
@@ -27,7 +27,6 @@ class Block : public Node {
   int life;
   BlockType type;
   std::vector<std::shared_ptr<Texture>> block_images;
-  std::shared_ptr<Sprite> sprite;
 };
 
 #endif  // __BLOCK_H__

@@ -10,6 +10,8 @@ extern SDL_Window* Window;
 extern SDL_Surface* ScreenSurface;
 extern SDL_Renderer* Renderer;
 
+extern double DeltaTime;
+
 void Log(const std::string_view& str);
 
 template <typename T>

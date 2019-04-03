@@ -1,7 +1,7 @@
 #include "application.h"
 #include "base.h"
-#include "scene_manager.h"
 #include "game/game_scene.h"
+#include "scene_manager.h"
 
 Application::Application() {}
 
@@ -22,8 +22,7 @@ bool Application::Initialize() {
     if (window == NULL)
       throw std::string("SDL_CreateWindow Error :") + SDL_GetError();
 
-    auto renderer = SDL_CreateRenderer(
-        window, -1, SDL_RENDERER_ACCELERATED);
+    auto renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
 
@@ -47,17 +46,7 @@ bool Application::Initialize() {
   }
 }
 
-void Application::Close() {
-  SDL_DestroyRenderer(Global::Renderer);
-  SDL_DestroyWindow(Global::Window);
-  Global::Renderer = NULL;
-  Global::Window = NULL;
-  IMG_Quit();
-  SDL_Quit();
-}
-
 void Application::Run() {
-
   auto running = true;
   SDL_Event event;
   while (running) {
@@ -74,8 +63,30 @@ void Application::Run() {
     }
 
     SDL_RenderClear(Global::Renderer);
+    UpdateDeltaTime();
     scene_manager->Play();
     SDL_RenderPresent(Global::Renderer);
     SDL_Delay(16);
   }
+}
+
+void Application::Close() {
+  SDL_DestroyRenderer(Global::Renderer);
+  SDL_DestroyWindow(Global::Window);
+  Global::Renderer = NULL;
+  Global::Window = NULL;
+  IMG_Quit();
+  SDL_Quit();
+}
+
+void Application::UpdateDeltaTime() {
+  static Uint64 NOW = SDL_GetPerformanceCounter();
+  static Uint64 LAST = 0;
+
+  LAST = NOW;
+  NOW = SDL_GetPerformanceCounter();
+
+  auto deltaTime =
+      ((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+  Global::DeltaTime = deltaTime;
 }

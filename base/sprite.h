@@ -15,18 +15,20 @@ class Sprite : public Node {
   virtual void Render() override;
 
   void SetPosition(int x, int y) {
-    destRect.x = x;
-    destRect.y = y;
+    dest_rect.x = x;
+    dest_rect.y = y;
   }
 
-  int Width() { return destRect.w; }
-  int Height() { return destRect.h; }
+  SDL_Rect& DestRect() { return dest_rect; }
+
+  int Width() { return dest_rect.w; }
+  int Height() { return dest_rect.h; }
 
   void SetTexture(std::shared_ptr<Texture> texture);
 
  private:
   std::shared_ptr<Texture> texture;
-  SDL_Rect destRect;
+  SDL_Rect dest_rect;
 };
 
 #endif  // __SPRITE_H__

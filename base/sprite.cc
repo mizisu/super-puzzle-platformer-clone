@@ -13,13 +13,13 @@ Sprite::~Sprite() {}
 void Sprite::Update() {}
 
 void Sprite::Render() {
-  SDL_RenderCopy(Global::Renderer, texture->SDLTexture(), NULL, &destRect);
+  SDL_RenderCopy(Global::Renderer, texture->SDLTexture(), NULL, &dest_rect);
 }
 
 void Sprite::SetTexture(std::shared_ptr<Texture> texture) {
   this->texture = texture;
-  destRect.x = 0;
-  destRect.y = 0;
-  destRect.w = texture->Width();
-  destRect.h = texture->Height();
+  dest_rect.x = 0;
+  dest_rect.y = 0;
+  dest_rect.w = texture->Width();
+  dest_rect.h = texture->Height();
 }

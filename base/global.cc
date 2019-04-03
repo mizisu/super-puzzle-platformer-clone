@@ -11,3 +11,4 @@ void Log(const std::string_view& str) { std::cout << str << std::endl; }
 SDL_Window* Global::Window = NULL;
 SDL_Surface* Global::ScreenSurface = NULL;
 SDL_Renderer* Global::Renderer = NULL;
+double Global::DeltaTime = 0;

@@ -15,6 +15,7 @@ class Application {
 
  private:
   void Close();
+  void UpdateDeltaTime();
 
  private:
   std::unique_ptr<SceneManager> scene_manager;
