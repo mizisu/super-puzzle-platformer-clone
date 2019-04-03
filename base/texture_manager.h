@@ -19,7 +19,10 @@ class TextureManager {
   std::shared_ptr<Texture> GetTexture(const std::string& path);
   void LoadTexture(const std::string& path);
 
-  private:
+ private:
+  std::string ConvertPath(const std::string& path);
+
+ private:
   std::map<std::string, std::shared_ptr<Texture>> textures;
 };
 

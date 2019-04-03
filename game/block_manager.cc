@@ -1,5 +1,5 @@
 #include "block_manager.h"
-#include "block.h"
+#include "normal_block.h"
 
 const int LeftPad = 96;
 const int TopPad = 330;
@@ -9,7 +9,7 @@ BlockManager::BlockManager() { CreateDefaultBlocks(); }
 void BlockManager::Update() {}
 
 void BlockManager::CreateBlock(int i, int j) {
-  auto block = std::make_shared<Block>();
+  auto block = std::make_shared<NormalBlock>();
   block->DestRect().x = i * block->Width() + LeftPad;
   block->DestRect().y = j * block->Height() + TopPad;
   blocks[i][j] = block;

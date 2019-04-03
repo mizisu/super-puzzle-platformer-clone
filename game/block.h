@@ -15,18 +15,11 @@ enum class BlockType {
 
 class Block : public Sprite {
  public:
-  Block();
-  ~Block();
-
   BlockType Type() { return type; }
-  void Hit();
-  
- private:
-  static RandomGenerator rand;
+  virtual void Hit() = 0;
 
-  int life;
+ protected:
   BlockType type;
-  std::vector<std::shared_ptr<Texture>> block_images;
 };
 
 #endif  // __BLOCK_H__

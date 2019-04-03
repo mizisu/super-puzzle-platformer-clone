@@ -6,7 +6,7 @@
 class BackgroundLayer : public Node {
  public:
   BackgroundLayer();
-  ~BackgroundLayer();
+  virtual ~BackgroundLayer();
 
  private:
   void CreateBottomLine();
@@ -18,4 +18,4 @@ class BackgroundLayer : public Node {
   int background_height;
 };
 
-#endif // __BACKGROUND_LAYER_H__
+#endif  // __BACKGROUND_LAYER_H__

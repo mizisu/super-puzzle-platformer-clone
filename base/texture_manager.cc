@@ -10,7 +10,7 @@ std::shared_ptr<Texture> TextureManager::GetTexture(const std::string& path) {
   if (find == textures.end()) {
     LoadTexture(path);
   }
-  return textures[path]; 
+  return textures[path];
 }
 
 void TextureManager::LoadTexture(const std::string& path) {

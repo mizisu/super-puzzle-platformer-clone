@@ -1,9 +1,12 @@
 #include "texture.h"
 
+const char* base = "./res/";
+
 Texture::Texture(const std::string& path) {
+  auto real_path = base + path;
   SDL_Texture* newTexture = NULL;
 
-  SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+  SDL_Surface* loadedSurface = IMG_Load(real_path.c_str());
 
   if (loadedSurface == NULL)
     Global::Log(std::string("Image load failed : ") + path + IMG_GetError());

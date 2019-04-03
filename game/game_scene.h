@@ -6,7 +6,7 @@
 class GameScene : public Scene {
  public:
   GameScene();
-  ~GameScene();
+  virtual ~GameScene();
 };
 
 #endif // __GAME_SCENE_H__
