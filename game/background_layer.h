@@ -1,7 +1,7 @@
 #ifndef __BACKGROUND_LAYER_H__
 #define __BACKGROUND_LAYER_H__
 
-#include "base/node.h"
+#include "base/components/node.h"
 
 class BackgroundLayer : public Node {
  public:

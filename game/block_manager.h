@@ -1,7 +1,7 @@
 #ifndef __BLOCK_MANAGER_H__
 #define __BLOCK_MANAGER_H__
 
-#include "base/node.h"
+#include "base/components/node.h"
 
 class Block;
 

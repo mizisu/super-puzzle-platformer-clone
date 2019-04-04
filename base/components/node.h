@@ -1,7 +1,7 @@
 #ifndef __NODE_H__
 #define __NODE_H__
 
-#include "base.h"
+#include "../base.h"
 
 class Node {
  public:

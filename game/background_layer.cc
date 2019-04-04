@@ -1,5 +1,5 @@
 #include "background_layer.h"
-#include "base/sprite.h"
+#include "base/components/sprite.h"
 
 const int UIHeihgt = 96;
 

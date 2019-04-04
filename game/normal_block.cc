@@ -1,5 +1,5 @@
 #include "normal_block.h"
-#include "base/texture_manager.h"
+#include "base/components/texture_manager.h"
 
 const int BlockLife = 2;
 

@@ -1,7 +1,7 @@
 #ifndef __BLOCK_H__
 #define __BLOCK_H__
 
-#include "base/sprite.h"
+#include "base/components/sprite.h"
 
 class Sprite;
 class Texture;
@@ -17,6 +17,8 @@ class Block : public Sprite {
  public:
   BlockType Type() { return type; }
   virtual void Hit() = 0;
+  
+  virtual void Update() override;
 
  protected:
   BlockType type;

@@ -20,6 +20,6 @@ void Sprite::SetTexture(std::shared_ptr<Texture> texture) {
   this->texture = texture;
   dest_rect.x = 0;
   dest_rect.y = 0;
-  dest_rect.w = texture->Width();
-  dest_rect.h = texture->Height();
+  dest_rect.w = width = texture->Width();
+  dest_rect.h = height = texture->Height();
 }

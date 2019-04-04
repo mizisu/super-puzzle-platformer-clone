@@ -1,7 +1,7 @@
 #include "application.h"
 #include "base.h"
 #include "game/game_scene.h"
-#include "scene_manager.h"
+#include "components/scene_manager.h"
 
 Application::Application() {}
 
@@ -88,5 +88,5 @@ void Application::UpdateDeltaTime() {
 
   auto deltaTime =
       ((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
-  Global::DeltaTime = deltaTime;
+  Global::DeltaTime = deltaTime / 100;
 }

@@ -21,14 +21,16 @@ class Sprite : public Node {
 
   SDL_Rect& DestRect() { return dest_rect; }
 
-  int Width() { return dest_rect.w; }
-  int Height() { return dest_rect.h; }
+  virtual int Width() { return width; }
+  virtual int Height() { return height; }
 
   void SetTexture(std::shared_ptr<Texture> texture);
 
- private:
+ protected:
   std::shared_ptr<Texture> texture;
   SDL_Rect dest_rect;
+  float width;
+  float height;
 };
 
 #endif  // __SPRITE_H__

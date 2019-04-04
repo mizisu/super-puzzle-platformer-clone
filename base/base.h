@@ -11,8 +11,8 @@
 #include <SDL2/SDL_image.h>
 
 #include "global.h"
-#include "random_generator.h"
-#include "timer.h"
+#include "utils/random_generator.h"
+#include "utils/timer.h"
 
 
 #endif  // __BASE_H__
