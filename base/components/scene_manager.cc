@@ -1,4 +1,5 @@
 #include "scene_manager.h"
+#include "physics.h"
 
 SceneManager::SceneManager() : current_scene(nullptr) {}
 
@@ -16,6 +17,7 @@ void SceneManager::Push(Scene* scene) {
 void SceneManager::Play() {
   if (current_scene) {
     current_scene->UpdateChildren();
+    Physics::UpdateAll();
     current_scene->RenderChildren();
   }
 }

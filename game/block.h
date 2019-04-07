@@ -2,9 +2,7 @@
 #define __BLOCK_H__
 
 #include "base/components/sprite.h"
-
-class Sprite;
-class Texture;
+#include "base/components/physics.h"
 
 enum class BlockType {
   Red,
@@ -13,11 +11,10 @@ enum class BlockType {
   Thorn,
 };
 
-class Block : public Sprite {
+class Block : public Physics, public Sprite {
  public:
   BlockType Type() { return type; }
   virtual void Hit() = 0;
-  
   virtual void Update() override;
 
  protected:

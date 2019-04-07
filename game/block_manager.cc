@@ -10,8 +10,8 @@ void BlockManager::Update() {}
 
 void BlockManager::CreateBlock(int i, int j) {
   auto block = std::make_shared<NormalBlock>();
-  block->DestRect().x = i * block->Width() + LeftPad;
-  block->DestRect().y = j * block->Height() + TopPad;
+  block->GetX() = i * block->Width() + LeftPad;
+  block->GetY() = j * block->Height() + TopPad;
   blocks[i][j] = block;
   this->AddChild(block);
 }
