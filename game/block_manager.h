@@ -15,8 +15,12 @@ class BlockManager : public Node {
 
   void CreateDefaultBlocks();
 
+  auto& Blocks() { return blocks; }
+
  private:
   void CreateBlock(int x, int y);
+  void BlockLoop(std::function<void(int i, int j)> func);
+  void BlockLoop(std::function<void(Block* block)> func);
 
  private:
   std::shared_ptr<Block> blocks[BlockMaxWidth][BlockMaxHeight];

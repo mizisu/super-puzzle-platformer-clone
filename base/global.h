@@ -5,6 +5,8 @@ namespace Global {
 
 const int ScreenWidth = 480;
 const int ScreenHeight = 680;
+const int LeftPad = 96;
+const int TopPad = 330;
 
 extern SDL_Window* Window;
 extern SDL_Surface* ScreenSurface;

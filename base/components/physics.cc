@@ -4,12 +4,12 @@
 std::vector<Physics*> Physics::physics_children;
 
 void Physics::UpdateAll() {
-  for (auto sprite : physics_children) {
-    sprite->UpdatePhysics();
+  for (auto phy : physics_children) {
+    phy->UpdatePhysics();
   }
 }
 
-Physics::Physics() : acceleration(0) {
+Physics::Physics() : enable_gravity(true), acceleration(0) {
   Physics::physics_children.push_back(this);
 }
 
@@ -22,8 +22,31 @@ Physics::~Physics() {
 
 void Physics::UpdatePhysics() {
   if (auto sp = dynamic_cast<Sprite*>(this); sp != nullptr) {
+    UpdatePosition(sp);
+  }
+}
+
+void Physics::EnableGravity(bool enable) {
+  enable_gravity = enable;
+  if (!enable_gravity) {
+    this->acceleration = 0;
+  }
+}
+
+void Physics::UpdatePosition(Sprite* sp) {
+  if (this->enable_gravity) {
     double delta = 50 * Global::DeltaTime;
     this->acceleration += Global::DeltaTime;
-    sp->GetY() += delta + acceleration;
+    sp->Y() += delta + acceleration;
+  }
+}
+
+void Physics::CheckCollision(Sprite* sp) {
+  SDL_Rect rect {sp->X(), sp->Y(), sp->Width(), sp->Height()};
+  SDL_Rect compare_rect;
+  for (auto& phy : Physics::physics_children) {
+    if (auto sp = dynamic_cast<Sprite*>(this); sp != nullptr) {
+
+    }
   }
 }

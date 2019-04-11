@@ -19,8 +19,8 @@ class Sprite : public Node {
     dest_rect.y = y;
   }
 
-  int& GetX() { return dest_rect.x; }
-  int& GetY() { return dest_rect.y; }
+  int& X() { return dest_rect.x; }
+  int& Y() { return dest_rect.y; }
   SDL_Rect& DestRect() { return dest_rect; }
 
   virtual int Width() { return width; }

@@ -11,10 +11,13 @@ NormalBlock::NormalBlock() : life(BlockLife) {
 
   if (type == BlockType::Red) {
     block_type = "r";
+    type = BlockType::Red;
   } else if (type == BlockType::Green) {
     block_type = "g";
+    type = BlockType::Green;
   } else if (type == BlockType::Blue) {
     block_type = "b";
+    type = BlockType::Blue;
   }
 
   std::string image_file = "play/block/" + block_type;
