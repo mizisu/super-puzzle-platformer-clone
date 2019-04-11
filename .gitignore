@@ -2,4 +2,6 @@
 /.vscode/settings.json
 /build
 __pycache__
+.idea
+venv
 .DS_Store
