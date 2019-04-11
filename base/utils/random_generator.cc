@@ -1,4 +1,4 @@
-#include "random_generator.h"
+#include "base/utils/random_generator.h"
 #include <random>
 
 RandomGenerator::RandomGenerator() {}

@@ -10,9 +10,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "global.h"
-#include "utils/random_generator.h"
-#include "utils/timer.h"
+#include "base/global.h"
+#include "base/utils/random_generator.h"
+#include "base/utils/timer.h"
 
 
 #endif  // __BASE_H__

@@ -1,7 +1,7 @@
-#include "application.h"
-#include "base.h"
+#include "base/application.h"
+#include "base/base.h"
+#include "base/components/scene_manager.h"
 #include "game/game_scene.h"
-#include "components/scene_manager.h"
 
 Application::Application() {}
 

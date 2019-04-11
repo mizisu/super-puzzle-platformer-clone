@@ -1,7 +1,7 @@
 #ifndef __NORMAL_BLOCK_H__
 #define __NORMAL_BLOCK_H__
 
-#include "block.h"
+#include "game/block.h"
 
 class NormalBlock : public Block {
  public:

@@ -1,7 +1,7 @@
 #ifndef __SCENE_H__
 #define __SCENE_H__
 
-#include "node.h"
+#include "base/components/node.h"
 
 class SceneManager;
 
@@ -10,7 +10,10 @@ class Scene : public Node {
   Scene();
   ~Scene();
   void Next(Scene* scene);
-  void SetSceneManager(SceneManager* scene_manager) { this->scene_manager = scene_manager; }
+  void SetSceneManager(SceneManager* scene_manager) {
+    this->scene_manager = scene_manager;
+  }
+
  private:
   SceneManager* scene_manager;
 };

@@ -1,4 +1,4 @@
-#include "block.h"
+#include "game/block.h"
 
 Block::Block() : block_x(0), block_y(0), max_y(0) {}
 

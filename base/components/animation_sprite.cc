@@ -1,5 +1,5 @@
-#include "animation_sprite.h"
-#include "texture.h"
+#include "base/components/animation_sprite.h"
+#include "base/components/texture.h"
 
 AnimationSprite::AnimationSprite()
     : frame_count(1), animaion_speed(0.f), current_frame(0.f) {}
@@ -27,11 +27,12 @@ void AnimationSprite::Update() {
 
   this->src_rect.x = (int)current_frame;
 
-  if(current_frame > frame_count) {
+  if (current_frame > frame_count) {
     current_frame = 0;
   }
 }
 
 void AnimationSprite::Render() {
-  SDL_RenderCopy(Global::Renderer, texture->SDLTexture(), &src_rect, &dest_rect);
+  SDL_RenderCopy(Global::Renderer, texture->SDLTexture(), &src_rect,
+                 &dest_rect);
 }

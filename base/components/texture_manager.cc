@@ -1,5 +1,5 @@
-#include "texture_manager.h"
-#include "texture.h"
+#include "base/components/texture_manager.h"
+#include "base/components/texture.h"
 
 TextureManager::TextureManager() {}
 

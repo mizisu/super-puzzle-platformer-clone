@@ -1,7 +1,7 @@
 #ifndef __ANIMATION_SPRITE_H__
 #define __ANIMATION_SPRITE_H__
 
-#include "sprite.h"
+#include "base/components/sprite.h"
 
 class AnimationSprite : public Sprite {
  public:

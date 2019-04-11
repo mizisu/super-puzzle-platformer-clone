@@ -1,4 +1,4 @@
-#include "normal_block.h"
+#include "game/normal_block.h"
 #include "base/components/texture_manager.h"
 
 const int BlockLife = 2;

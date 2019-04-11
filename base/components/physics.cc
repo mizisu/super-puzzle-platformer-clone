@@ -1,5 +1,5 @@
-#include "physics.h"
-#include "sprite.h"
+#include "base/components/physics.h"
+#include "base/components/sprite.h"
 
 std::vector<Physics*> Physics::physics_children;
 
@@ -42,11 +42,10 @@ void Physics::UpdatePosition(Sprite* sp) {
 }
 
 void Physics::CheckCollision(Sprite* sp) {
-  SDL_Rect rect {sp->X(), sp->Y(), sp->Width(), sp->Height()};
+  SDL_Rect rect{sp->X(), sp->Y(), sp->Width(), sp->Height()};
   SDL_Rect compare_rect;
   for (auto& phy : Physics::physics_children) {
     if (auto sp = dynamic_cast<Sprite*>(this); sp != nullptr) {
-
     }
   }
 }

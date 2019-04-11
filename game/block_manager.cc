@@ -1,5 +1,5 @@
-#include "block_manager.h"
-#include "normal_block.h"
+#include "game/block_manager.h"
+#include "game/normal_block.h"
 
 void BlockManager::BlockLoop(std::function<void(int i, int j)> func) {
   for (int i = 0; i < BlockMaxWidth; i++) {

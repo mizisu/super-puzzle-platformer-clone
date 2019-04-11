@@ -1,7 +1,7 @@
 #ifndef __SPRITE_H__
 #define __SPRITE_H__
 
-#include "node.h"
+#include "base/components/node.h"
 
 class Texture;
 

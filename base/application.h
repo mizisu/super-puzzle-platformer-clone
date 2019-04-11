@@ -2,7 +2,7 @@
 #ifndef __APPLICATION_H__
 #define __APPLICATION_H__
 
-#include "base.h"
+#include "base/base.h"
 
 class SceneManager;
 

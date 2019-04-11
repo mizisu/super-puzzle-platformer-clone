@@ -1,5 +1,5 @@
-#include "scene_manager.h"
-#include "physics.h"
+#include "base/components/scene_manager.h"
+#include "base/components/physics.h"
 
 SceneManager::SceneManager() : current_scene(nullptr) {}
 
