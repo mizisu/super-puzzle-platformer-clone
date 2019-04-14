@@ -1,14 +1,14 @@
 import os
 import subprocess
-import builder.utils
+import builder.utils as utils
 
 
 def build(root: str):
     build_dir = root + '/build/'
-    builder.utils.clear_folder(build_dir)
+    utils.clear_folder(build_dir)
     if not os.path.isdir(build_dir):
         os.mkdir(build_dir)
-    cc_files = builder.utils.get_cc_files(root)
+    cc_files = utils.get_cc_files(root)
     obj_files = []
     for file in cc_files:
         obj_file = os.path.splitext(os.path.basename(file))[0]

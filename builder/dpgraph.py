@@ -1,6 +1,6 @@
-import builder.utils
 import os
 import re
+import builder.utils as utils
 
 
 class Graph:
@@ -8,7 +8,7 @@ class Graph:
         self.include_rex = re.compile(r"#include\s*\"(.+)\"")
 
     @staticmethod
-    def convert_relative_path(files):
+    def remove_current_dir_prefix(files):
         return [file[2:] for file in files]
 
     def find_includes(self, file):
@@ -18,10 +18,12 @@ class Graph:
             return all_includes
 
     def make_graph(self, root: str):
-        files = builder.utils.get_cc_files(root, with_header=True)
-        rel_files = self.convert_relative_path(files)
-        print(rel_files)
-        print(self.find_includes(rel_files[3]))
+        files = utils.get_cc_files(root, with_header=True)
+
+        for file in files:
+            print(file)
+            print(self.find_includes(file))
+            print()
 
 
 if __name__ == '__main__':

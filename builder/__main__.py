@@ -1,4 +1,4 @@
-import builder.simplebuilder
+import builder.simplebuilder as simplebuilder
 
 if __name__ == "__main__":
-    builder.simplebuilder.build('.')
+    simplebuilder.build('.')
