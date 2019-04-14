@@ -21,10 +21,15 @@ class Physics {
  private:
   void UpdatePosition(Sprite* sp);
   void CheckCollision(Sprite* sp);
+  void Intersect(Sprite* sp, Sprite* other);
+
+ protected:
+  void OnCollision(std::function<void(Sprite*)> fn) { on_collision = fn; }
 
  private:
   double acceleration;
   bool enable_gravity;
+  std::function<void(Sprite*)> on_collision;
 };
 
 #endif  // __PHYSICS_H__

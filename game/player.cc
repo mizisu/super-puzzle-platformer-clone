@@ -6,6 +6,11 @@ Player::Player() {
       TextureManager::GetInstance().GetTexture("play/player/stand.png"), 4);
 
   this->X() = Global::ScreenWidth / 2 + Global::LeftPad;
+
+  this->OnCollision([&](Sprite* other) {
+    this->EnableGravity(false);
+    this->Y() = other->Y() - this->Height();
+  });
 }
 
 Player::~Player() {}
