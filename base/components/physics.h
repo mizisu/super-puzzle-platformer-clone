@@ -24,12 +24,12 @@ class Physics {
   void Intersect(Sprite* sp, Sprite* other);
 
  protected:
-  void OnCollision(std::function<void(Sprite*)> fn) { on_collision = fn; }
+  void Collision(std::function<void(Sprite*)> fn) { collision = fn; }
 
  private:
   double acceleration;
   bool enable_gravity;
-  std::function<void(Sprite*)> on_collision;
+  std::function<void(Sprite*)> collision;
 };
 
 #endif  // __PHYSICS_H__

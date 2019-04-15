@@ -1,5 +1,6 @@
 #include "base/application.h"
 #include "base/base.h"
+#include "base/components/input.h"
 #include "base/components/scene_manager.h"
 #include "game/game_scene.h"
 
@@ -60,10 +61,12 @@ void Application::Run() {
             break;
         }
       }
+      Input::GetInstance().Update(event);
     }
-
+    
     SDL_RenderClear(Global::Renderer);
     UpdateDeltaTime();
+    Input::GetInstance().Update(event);
     scene_manager->Play();
     SDL_RenderPresent(Global::Renderer);
     SDL_Delay(16);

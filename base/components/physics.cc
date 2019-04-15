@@ -10,7 +10,7 @@ void Physics::UpdateAll() {
 }
 
 Physics::Physics()
-    : enable_gravity(true), acceleration(0), on_collision(nullptr) {
+    : enable_gravity(true), acceleration(0), collision(nullptr) {
   Physics::physics_children.push_back(this);
 }
 
@@ -19,6 +19,7 @@ Physics::~Physics() {
   if (auto iter = std::find(v.begin(), v.end(), this); iter == v.end()) {
     v.erase(iter);
   }
+  this->collision = nullptr;
 }
 
 void Physics::UpdatePhysics() {
@@ -48,13 +49,13 @@ void Physics::Intersect(Sprite* sp, Sprite* other) {
     auto& rect = sp->DestRect();
     auto& other_rect = other->DestRect();
     if (SDL_HasIntersection(&rect, &other_rect)) {
-      this->on_collision(other);
+      this->collision(other);
     }
   }
 }
 
 void Physics::CheckCollision(Sprite* sp) {
-  if (this->on_collision == nullptr) return;
+  if (this->collision == nullptr) return;
   for (auto& phy : Physics::physics_children) {
     if (auto* other = dynamic_cast<Sprite*>(phy); other != nullptr) {
       Intersect(sp, other);
