@@ -39,6 +39,8 @@ bool Application::Initialize() {
     scene_manager = std::make_unique<SceneManager>();
     scene_manager->Push(new GameScene());
 
+    Input::GetInstance().Initialize();
+
     return true;
 
   } catch (const std::string& error) {
@@ -63,10 +65,10 @@ void Application::Run() {
       }
       Input::GetInstance().Update(event);
     }
-    
+
     SDL_RenderClear(Global::Renderer);
     UpdateDeltaTime();
-    Input::GetInstance().Update(event);
+    Input::GetInstance().UpdateKeyState();
     scene_manager->Play();
     SDL_RenderPresent(Global::Renderer);
     SDL_Delay(16);

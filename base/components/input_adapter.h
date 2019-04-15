@@ -5,7 +5,7 @@
 
 class InputAdapter {
  public:
-  typedef std::function<void(const SDL_Keycode& keycode)> KeyDownFunction;
+  typedef std::function<void(const SDL_Scancode& keycode)> KeyDownFunction;
 
   InputAdapter();
   virtual ~InputAdapter();
@@ -13,12 +13,12 @@ class InputAdapter {
   void KeyPress(KeyDownFunction fn) { keypress = fn; }
   void KeyUp(KeyDownFunction fn) { keyup = fn; }
 
-  void OnKeyDown(const SDL_Keycode& keycode) { OnEvent(keydown, keycode); }
-  void OnKeyPress(const SDL_Keycode& keycode) { OnEvent(keypress, keycode); }
-  void OnKeyUp(const SDL_Keycode& keycode) { OnEvent(keyup, keycode); }
+  void OnKeyDown(const SDL_Scancode& keycode) { OnEvent(keydown, keycode); }
+  void OnKeyPress(const SDL_Scancode& keycode) { OnEvent(keypress, keycode); }
+  void OnKeyUp(const SDL_Scancode& keycode) { OnEvent(keyup, keycode); }
 
  private:
-  void OnEvent(KeyDownFunction fn, const SDL_Keycode& keycode) {
+  void OnEvent(KeyDownFunction fn, const SDL_Scancode& keycode) {
     if (fn != nullptr) fn(keycode);
   }
 

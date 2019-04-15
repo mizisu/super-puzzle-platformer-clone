@@ -6,6 +6,7 @@
 class InputAdapter;
 
 enum class KeyState {
+  None,
   KeyDown,
   KeyPress,
   KeyUp,
@@ -13,7 +14,7 @@ enum class KeyState {
 
 class Input {
  private:
-  Input() = default;
+  Input() : prev_keystate(nullptr), current_keystate(nullptr){};
 
  public:
   static auto& GetInstance() {
@@ -21,19 +22,27 @@ class Input {
     return input;
   }
 
+  void Initialize();
   void Update(const SDL_Event& event);
+  void UpdateKeyState();
   void AddAdapter(InputAdapter* adapter);
   void RemoveAdapter(InputAdapter* adapter);
-  KeyState GetKeyState(const SDL_Keycode& keycode);
+  KeyState GetKeyState(const SDL_Scancode& scancode);
+  bool IsKeyDown(const SDL_Scancode& scancode);
+  bool IsKeyPress(const SDL_Scancode& scancode);
+  bool IsKeyUp(const SDL_Scancode& scancode);
 
  private:
-  void OnKeyDown(const SDL_Keycode& keycode);
-  void OnKeyDownCore(const SDL_Keycode& keycode);
-  void OnKeyPress(const SDL_Keycode& keycode);
-  void OnKeyUp(const SDL_Keycode& keycode);
+  void OnKeyDown(const SDL_Scancode& scancode);
+  void OnKeyDownCore(const SDL_Scancode& scancode);
+  void OnKeyPress(const SDL_Scancode& scancode);
+  void OnKeyUp(const SDL_Scancode& scancode);
 
  private:
-  std::unordered_map<SDL_Keycode, KeyState> tracking_keys;
+  const Uint8* prev_keystate;
+  const Uint8* current_keystate;
+  // bool keystate[SDL_NUM_SCANCODES];
+  std::unordered_map<SDL_Scancode, KeyState> tracking_keys;
   std::vector<InputAdapter*> adapters;
 };
 

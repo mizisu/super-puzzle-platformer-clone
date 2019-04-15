@@ -21,8 +21,9 @@ Player::~Player() {}
 
 void Player::Update() {
   base::Update();
-  if (Input::GetInstance().GetKeyState(SDLK_RIGHT) == KeyState::KeyPress)
+  if (Input::GetInstance().IsKeyPress(SDL_SCANCODE_RIGHT))
     this->X() += 100 * Global::DeltaTime;
-  else if (Input::GetInstance().GetKeyState(SDLK_LEFT) == KeyState::KeyPress)
+  else if (Input::GetInstance().GetKeyState(SDL_SCANCODE_LEFT) ==
+           KeyState::KeyPress)
     this->X() -= 100 * Global::DeltaTime;
 }
