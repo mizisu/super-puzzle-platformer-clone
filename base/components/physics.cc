@@ -10,7 +10,7 @@ void Physics::UpdateAll() {
 }
 
 Physics::Physics()
-    : enable_gravity(true), acceleration(0), collision(nullptr) {
+    : enable_gravity(true), acceleration(30), velocity(0), collision(nullptr) {
   Physics::physics_children.push_back(this);
 }
 
@@ -32,15 +32,14 @@ void Physics::UpdatePhysics() {
 void Physics::EnableGravity(bool enable) {
   enable_gravity = enable;
   if (!enable_gravity) {
-    this->acceleration = 0;
+    this->velocity = 0;
   }
 }
 
 void Physics::UpdatePosition(Sprite* sp) {
   if (this->enable_gravity) {
-    double delta = 50 * Global::DeltaTime;
-    this->acceleration += Global::DeltaTime;
-    sp->Y() += delta + acceleration;
+    this->velocity += acceleration;
+    sp->Y() += this->velocity * Global::DeltaTime;
   }
 }
 

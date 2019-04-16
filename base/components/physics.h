@@ -25,9 +25,11 @@ class Physics {
 
  protected:
   void Collision(std::function<void(Sprite*)> fn) { collision = fn; }
+  void ForceY(double force) { velocity = force; }
 
  private:
   double acceleration;
+  double velocity;
   bool enable_gravity;
   std::function<void(Sprite*)> collision;
 };

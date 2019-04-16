@@ -15,7 +15,7 @@ async def com(root, file, obj_file):
         '-o',
         obj_file
     ])
-    
+    print(file);
     proc = await asyncio.create_subprocess_shell(
         cmd,
         stdout=asyncio.subprocess.PIPE,
@@ -40,7 +40,7 @@ async def build(root: str):
         tasks.append(com(root, file, obj_file))
 
     await asyncio.wait(tasks)
-
+    print('linking')
     subprocess.call(['clang++',
                      '-o',
                      build_dir + 'game',

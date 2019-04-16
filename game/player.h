@@ -19,6 +19,11 @@ class Player : public AnimationSprite, public Physics {
   virtual void Update() override;
 
  private:
+  void Move();
+  void Jump();
+  void CollisionBlock(Sprite* block);
+
+ private:
   PlayerState state;
 };
 
