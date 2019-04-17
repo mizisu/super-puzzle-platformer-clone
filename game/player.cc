@@ -3,7 +3,8 @@
 #include "base/components/input_adapter.h"
 #include "base/components/texture_manager.h"
 
-InputAdapter a;
+const double MoveForce = 80;
+const double JumpForce = -250;
 
 Player::Player() : state(PlayerState::Stand) {
   this->SetAnimationTexture(
@@ -18,25 +19,34 @@ Player::~Player() {}
 
 void Player::Update() {
   base::Update();
-  
+
   if (Input::GetInstance().IsKeyPress(SDL_SCANCODE_RIGHT)) {
-    this->X() += 100 * Global::DeltaTime;
+    this->Move(MoveForce);
   }
   if (Input::GetInstance().IsKeyPress(SDL_SCANCODE_LEFT)) {
-    this->X() -= 100 * Global::DeltaTime;
+    this->Move(-MoveForce);
   }
 
   if (Input::GetInstance().IsKeyPress(SDL_SCANCODE_UP) &&
       state != PlayerState::Jump) {
+    this->Jump();
   }
 }
 
-void Player::Move() {}
+void Player::Move(double force) {
+  this->X() += force * Global::DeltaTime;
+  if (this->X() < Global::LeftPad) {
+    this->X() = Global::LeftPad;
+  }
+  if (this->X() > Global::RightEnd - this->Width()) {
+    this->X() = Global::RightEnd - this->Width();
+  }
+}
 
 void Player::Jump() {
   this->state = PlayerState::Jump;
   this->EnableGravity(true);
-  this->ForceY(-250);
+  this->ForceY(JumpForce);
 }
 
 void Player::CollisionBlock(Sprite* block) {

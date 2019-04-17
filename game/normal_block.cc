@@ -6,7 +6,7 @@ const int BlockLife = 2;
 RandomGenerator NormalBlock::rand;
 
 NormalBlock::NormalBlock() : life(BlockLife) {
-  type = (BlockType)rand.Get(0, 2);
+  type = (BlockType)rand.Get(0, 3);
   std::string block_type = "";
 
   if (type == BlockType::Red) {

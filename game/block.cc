@@ -1,11 +1,22 @@
 #include "game/block.h"
 
-Block::Block() : block_x(0), block_y(0), max_y(0) {}
+Block::Block() : block_x(0), block_y(0), max_y(0) {
+  // this->Collision([&](Sprite* other) {
+  //   if (auto block = dynamic_cast<Block*>(other); block) {
+  //     if(this->Y() < other->Y()) {
+  //       this->Y() = other->Y() - other->Height();
+  //       this->EnableGravity(false);
+  //     }
+  //   }
+  // });
+}
 
 void Block::Update() {
-  if (this->Y() > max_y) {
+  if (this->Y() >= max_y) {
     this->Y() = max_y;
     this->EnableGravity(false);
+  } else {
+    this->EnableGravity(true);
   }
 }
 

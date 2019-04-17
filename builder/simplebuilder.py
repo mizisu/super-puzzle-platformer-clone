@@ -15,13 +15,14 @@ async def com(root, file, obj_file):
         '-o',
         obj_file
     ])
-    print(file);
+    print(file)
     proc = await asyncio.create_subprocess_shell(
         cmd,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE)
-        
-    await proc.communicate()
+    (_, result) = await proc.communicate()
+    if result:
+        print(result)
 
 
 async def build(root: str):
@@ -32,7 +33,7 @@ async def build(root: str):
     cc_files = utils.get_cc_files(root)
     obj_files = []
     tasks = []
-    
+
     for file in cc_files:
         obj_file = os.path.splitext(os.path.basename(file))[0]
         obj_file = build_dir + obj_file

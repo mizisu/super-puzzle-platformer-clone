@@ -9,7 +9,7 @@ class RandomGenerator {
   ~RandomGenerator();
 
   /*
-  * Generate random number include min max value
+  * Generate random number include (min ... max - 1) value
   */
   int Get(int min, int max);
  private:

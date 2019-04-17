@@ -19,7 +19,7 @@ class Player : public AnimationSprite, public Physics {
   virtual void Update() override;
 
  private:
-  void Move();
+  void Move(double force);
   void Jump();
   void CollisionBlock(Sprite* block);
 

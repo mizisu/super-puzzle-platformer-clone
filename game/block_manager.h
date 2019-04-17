@@ -5,25 +5,26 @@
 
 class Block;
 
-const int BlockMaxWidth = 8;
-const int BlockMaxHeight = 12;
+const int BlockMaxColumn = 8;
+const int BlockMaxRow = 12;
 
 class BlockManager : public Node {
  public:
   BlockManager();
   virtual void Update() override;
-
   void CreateDefaultBlocks();
+  void CreateNewBlock();
 
   auto& Blocks() { return blocks; }
 
  private:
   void CreateBlock(int x, int y);
-  void BlockLoop(std::function<void(int i, int j)> func);
-  void BlockLoop(std::function<void(Block* block)> func);
+  void UpdateBlock(Block* block, int x, int y);
+  void CheckAndSwapBelowBlock(int x, int y);
 
  private:
-  std::shared_ptr<Block> blocks[BlockMaxWidth][BlockMaxHeight];
+  Block* blocks[BlockMaxColumn][BlockMaxRow];
+  RandomGenerator random;
 };
 
 #endif  // __BLOCK_MANAGER_H__

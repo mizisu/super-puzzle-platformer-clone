@@ -1,39 +1,63 @@
 #include "game/block_manager.h"
+#include "base/components/input_adapter.h"
 #include "game/normal_block.h"
 
-void BlockManager::BlockLoop(std::function<void(int i, int j)> func) {
-  for (int i = 0; i < BlockMaxWidth; i++) {
-    for (int j = BlockMaxWidth - 3; j < BlockMaxWidth; j++) {
-      func(i, j);
+InputAdapter adapter;
+
+BlockManager::BlockManager() {
+  CreateDefaultBlocks();
+
+  // TODO: remove test code
+  adapter.KeyDown([&](auto scancode) {
+    if (scancode == SDL_SCANCODE_SPACE) this->CreateNewBlock();
+  });
+}
+
+void BlockManager::Update() {
+  for (int i = 0; i < BlockMaxColumn; i++) {
+    for (int j = 0; j < BlockMaxRow; j++) {
+      if (blocks[i][j] != nullptr) {
+        UpdateBlock(blocks[i][j], i, j);
+      }
     }
   }
 }
 
-void BlockManager::BlockLoop(std::function<void(Block* block)> func) {
-  BlockLoop([&](int i, int j) {
-    auto block = Blocks()[i][j];
-    if (block != nullptr) func(block.get());
-  });
+void BlockManager::CreateDefaultBlocks() {
+  for (int i = 0; i < BlockMaxColumn; i++) {
+    for (int j = 0; j < BlockMaxRow; j++) {
+      if (j >= BlockMaxRow - 3)
+        CreateBlock(i, j);
+      else
+        blocks[i][j] = nullptr;
+    }
+  }
 }
 
-BlockManager::BlockManager() { CreateDefaultBlocks(); }
-
-void BlockManager::Update() {
-  BlockLoop([&](int i, int j) {
-    auto block = Blocks()[i][j];
-    if (block != nullptr) {
-    }
-  });
+void BlockManager::CreateNewBlock() {
+  int x = random.Get(0, BlockMaxColumn);
+  if (this->blocks[x][0] == nullptr) {
+    this->CreateBlock(x, 0);
+  }
 }
 
 void BlockManager::CreateBlock(int i, int j) {
   auto block = std::make_shared<NormalBlock>();
   block->SetBlockPosX(i);
   block->SetBlockPosY(j);
-  blocks[i][j] = block;
+  blocks[i][j] = block.get();
   this->AddChild(block);
 }
 
-void BlockManager::CreateDefaultBlocks() {
-  BlockLoop([&](int i, int j) { CreateBlock(i, j); });
+void BlockManager::UpdateBlock(Block* block, int x, int y) {
+  CheckAndSwapBelowBlock(x, y);
+}
+
+void BlockManager::CheckAndSwapBelowBlock(int x, int y) {
+  if (y + 1 < BlockMaxRow && blocks[x][y + 1] == nullptr) {
+    auto block = blocks[x][y];
+    blocks[x][y] = nullptr;
+    blocks[x][y + 1] = block;
+    block->SetBlockY(y + 1);
+  }
 }
