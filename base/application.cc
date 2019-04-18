@@ -68,7 +68,6 @@ void Application::Run() {
 
     SDL_RenderClear(Global::Renderer);
     UpdateDeltaTime();
-    Input::GetInstance().UpdateKeyState();
     scene_manager->Play();
     SDL_RenderPresent(Global::Renderer);
     SDL_Delay(16);

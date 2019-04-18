@@ -11,7 +11,7 @@ void Physics::UpdateAll() {
 
 Physics::Physics()
     : enable_gravity(true),
-      acceleration(20),
+      acceleration(15),
       velocity_x(0),
       velocity_y(0),
       collision(nullptr) {
@@ -53,8 +53,9 @@ void Physics::Intersect(Sprite* sp, Sprite* other) {
   if (other != sp) {
     auto& rect = sp->DestRect();
     auto& other_rect = other->DestRect();
-    if (SDL_HasIntersection(&rect, &other_rect)) {
-      this->collision(other);
+    SDL_Rect result;
+    if (SDL_IntersectRect(&rect, &other_rect, &result)) {
+      this->collision(other, result);
     }
   }
 }

@@ -14,7 +14,7 @@ enum class KeyState {
 
 class Input {
  private:
-  Input() : prev_keystate(nullptr), current_keystate(nullptr){};
+  Input() = default;
 
  public:
   static auto& GetInstance() {
@@ -24,7 +24,6 @@ class Input {
 
   void Initialize();
   void Update(const SDL_Event& event);
-  void UpdateKeyState();
   void AddAdapter(InputAdapter* adapter);
   void RemoveAdapter(InputAdapter* adapter);
   KeyState GetKeyState(const SDL_Scancode& scancode);
@@ -39,9 +38,6 @@ class Input {
   void OnKeyUp(const SDL_Scancode& scancode);
 
  private:
-  const Uint8* prev_keystate;
-  const Uint8* current_keystate;
-  // bool keystate[SDL_NUM_SCANCODES];
   std::unordered_map<SDL_Scancode, KeyState> tracking_keys;
   std::vector<InputAdapter*> adapters;
 };

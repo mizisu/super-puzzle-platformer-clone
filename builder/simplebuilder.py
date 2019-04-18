@@ -22,6 +22,7 @@ async def com(root, file, obj_file):
         stderr=asyncio.subprocess.PIPE)
     (_, result) = await proc.communicate()
     if result:
+        print()
         print(result)
 
 

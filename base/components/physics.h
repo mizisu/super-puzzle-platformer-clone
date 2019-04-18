@@ -24,7 +24,7 @@ class Physics {
   void Intersect(Sprite* sp, Sprite* other);
 
  protected:
-  void Collision(std::function<void(Sprite*)> fn) { collision = fn; }
+  void Collision(std::function<void(Sprite*, const SDL_Rect&)> fn) { collision = fn; }
   void ForceX(double force) { velocity_x = force; }
   void ForceY(double force) { velocity_y = force; }
 
@@ -33,7 +33,7 @@ class Physics {
   double velocity_y;
   double velocity_x;  
   bool enable_gravity;
-  std::function<void(Sprite*)> collision;
+  std::function<void(Sprite*, const SDL_Rect& result)> collision;
 };
 
 #endif  // __PHYSICS_H__

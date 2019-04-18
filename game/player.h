@@ -21,7 +21,7 @@ class Player : public AnimationSprite, public Physics {
  private:
   void Move(double force);
   void Jump();
-  void CollisionBlock(Sprite* block);
+  void CollisionBlock(Sprite* block, const SDL_Rect& result);
 
  private:
   PlayerState state;
