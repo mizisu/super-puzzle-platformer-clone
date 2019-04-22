@@ -9,6 +9,9 @@ AnimationSprite::~AnimationSprite() {}
 void AnimationSprite::SetAnimationTexture(std::shared_ptr<Texture> texture,
                                           int frame_count,
                                           double animaion_speed) {
+  if (this->texture != nullptr && this->texture->Name() == texture->Name())
+    return;
+
   this->SetTexture(texture);
   this->frame_count = frame_count;
   this->animaion_speed = animaion_speed;
@@ -30,9 +33,4 @@ void AnimationSprite::Update() {
   if (current_frame > frame_count) {
     current_frame = 0;
   }
-}
-
-void AnimationSprite::Render() {
-  SDL_RenderCopy(Global::Renderer, texture->SDLTexture(), &src_rect,
-                 &dest_rect);
 }

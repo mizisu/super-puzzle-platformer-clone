@@ -1,6 +1,5 @@
 #include "base/application.h"
 #include "base/base.h"
-#include "base/components/input.h"
 #include "base/components/scene_manager.h"
 #include "game/game_scene.h"
 

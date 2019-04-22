@@ -2,7 +2,7 @@
 
 const char* base = "./res/";
 
-Texture::Texture(const std::string& path) {
+Texture::Texture(const std::string& path) : name(path) {
   auto real_path = base + path;
   SDL_Texture* newTexture = NULL;
 

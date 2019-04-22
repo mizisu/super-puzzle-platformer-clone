@@ -2,9 +2,13 @@
 #include "base/components/texture.h"
 #include "base/components/texture_manager.h"
 
-Sprite::Sprite() {}
+Sprite::Sprite() : texture(nullptr), angle(0), is_flip_horz(false) {
+  dest_rect = {0, 0, 0, 0};
+  src_rect = {0, 0, 0, 0};
+  center = {0, 0};
+}
 
-Sprite::Sprite(const std::string& filename) {
+Sprite::Sprite(const std::string& filename) : Sprite() {
   SetTexture(TextureManager::GetInstance().GetTexture(filename));
 }
 
@@ -13,13 +17,19 @@ Sprite::~Sprite() {}
 void Sprite::Update() {}
 
 void Sprite::Render() {
-  SDL_RenderCopy(Global::Renderer, texture->SDLTexture(), NULL, &dest_rect);
+  int flip = SDL_FLIP_NONE;
+  if (is_flip_horz) flip |= SDL_FLIP_HORIZONTAL;
+
+  SDL_RenderCopyEx(Global::Renderer, texture->SDLTexture(), &src_rect,
+                   &dest_rect, angle, &center, (SDL_RendererFlip)flip);
 }
 
 void Sprite::SetTexture(std::shared_ptr<Texture> texture) {
   this->texture = texture;
-  dest_rect.x = 0;
-  dest_rect.y = 0;
-  dest_rect.w = width = texture->Width();
-  dest_rect.h = height = texture->Height();
+  width = texture->Width();
+  height = texture->Height();
+  dest_rect.w = width;
+  dest_rect.h = height;
+  src_rect.w = width;
+  src_rect.h = height;
 }

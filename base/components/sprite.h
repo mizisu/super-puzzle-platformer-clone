@@ -26,11 +26,17 @@ class Sprite : public Node {
   virtual int Width() { return width; }
   virtual int Height() { return height; }
 
+  void FlipHorizontal(bool is_flip) { is_flip_horz = is_flip; }
   void SetTexture(std::shared_ptr<Texture> texture);
 
  protected:
   std::shared_ptr<Texture> texture;
+  SDL_Rect src_rect;
   SDL_Rect dest_rect;
+  SDL_Point center;
+  double angle;
+  SDL_RendererFlip flip;
+  bool is_flip_horz;
   float width;
   float height;
 };

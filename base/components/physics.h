@@ -27,6 +27,7 @@ class Physics {
   void Collision(std::function<void(Sprite*, const SDL_Rect&)> fn) { collision = fn; }
   void ForceX(double force) { velocity_x = force; }
   void ForceY(double force) { velocity_y = force; }
+  bool IsFalling() { return velocity_y > 0; }
 
  private:
   double acceleration;

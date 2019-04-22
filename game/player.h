@@ -24,7 +24,10 @@ class Player : public AnimationSprite, public Physics {
   void CollisionBlock(Sprite* block, const SDL_Rect& result);
 
  private:
+  InputAdapter input_adapter;
   PlayerState state;
+  std::shared_ptr<Texture> texture_stand;
+  std::shared_ptr<Texture> texture_move;
 };
 
 #endif  // __PLAYER_H__
