@@ -1,5 +1,5 @@
 #include "game/block_manager.h"
-#include "base/components/input_adapter.h"
+#include "base/input_adapter.h"
 #include "game/normal_block.h"
 
 InputAdapter adapter;

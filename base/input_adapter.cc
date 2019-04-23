@@ -1,4 +1,4 @@
-#include "base/components/input_adapter.h"
+#include "base/input_adapter.h"
 
 InputAdapter::InputAdapter()
     : keydown(nullptr), keypress(nullptr), keyup(nullptr) {

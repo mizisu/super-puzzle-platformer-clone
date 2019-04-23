@@ -1,6 +1,7 @@
 #include "game/player.h"
-#include "base/components/input_adapter.h"
 #include "base/components/texture_manager.h"
+#include "base/input_adapter.h"
+#include "game/block.h"
 
 const double MoveForce = 80;
 const double JumpForce = -200;
@@ -18,8 +19,10 @@ Player::Player()
 
   this->X() = Global::ScreenWidth / 2 + Global::LeftPad;
 
-  this->Collision(
-      [&](Sprite* other, auto result) { this->CollisionBlock(other, result); });
+  this->Collision([&](Sprite* other, auto result) {
+    if (auto block = dynamic_cast<Block*>(other); block != nullptr)
+      this->CollisionBlock(block, result);
+  });
 
   this->input_adapter.KeyDown([&](auto scancode) {
     if (scancode == SDL_SCANCODE_UP && state != PlayerState::Jump) Jump();
@@ -69,7 +72,7 @@ void Player::Jump() {
   this->ForceY(JumpForce);
 }
 
-void Player::CollisionBlock(Sprite* block, const SDL_Rect& result) {
+void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
   if (this->Y() < block->Y() && this->IsFalling()) {
     this->state = PlayerState::Stand;
     this->EnableGravity(false);

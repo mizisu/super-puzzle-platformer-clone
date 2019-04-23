@@ -33,3 +33,7 @@ void Sprite::SetTexture(std::shared_ptr<Texture> texture) {
   src_rect.w = width;
   src_rect.h = height;
 }
+
+void Sprite::SetTexture(const std::string& filename) {
+  SetTexture(TextureManager::GetInstance().GetTexture(filename));
+}

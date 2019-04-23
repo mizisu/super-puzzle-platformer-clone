@@ -1,5 +1,5 @@
-#include "base/components/input.h"
-#include "base/components/input_adapter.h"
+#include "base/input.h"
+#include "base/input_adapter.h"
 
 void Input::Initialize() {
 }

@@ -4,6 +4,8 @@
 #include "base/components/animation_sprite.h"
 #include "base/components/physics.h"
 
+class Block;
+
 enum class PlayerState {
   Stand,
   RunLeft,
@@ -12,8 +14,8 @@ enum class PlayerState {
 };
 
 class Player : public AnimationSprite, public Physics {
+  using base = AnimationSprite;
  public:
-  typedef AnimationSprite base;
   Player();
   virtual ~Player();
   virtual void Update() override;
@@ -21,7 +23,7 @@ class Player : public AnimationSprite, public Physics {
  private:
   void Move(double force);
   void Jump();
-  void CollisionBlock(Sprite* block, const SDL_Rect& result);
+  void CollisionBlock(Block* block, const SDL_Rect& result);
 
  private:
   InputAdapter input_adapter;

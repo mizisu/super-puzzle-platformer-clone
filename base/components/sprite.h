@@ -22,12 +22,14 @@ class Sprite : public Node {
   int& X() { return dest_rect.x; }
   int& Y() { return dest_rect.y; }
   SDL_Rect& DestRect() { return dest_rect; }
+  bool IsFlipHorizontal() { return is_flip_horz; }
 
   virtual int Width() { return width; }
   virtual int Height() { return height; }
 
   void FlipHorizontal(bool is_flip) { is_flip_horz = is_flip; }
   void SetTexture(std::shared_ptr<Texture> texture);
+  void SetTexture(const std::string& filename);
 
  protected:
   std::shared_ptr<Texture> texture;

@@ -14,8 +14,8 @@
 #include "base/global.h"
 #include "base/utils/random_generator.h"
 #include "base/utils/timer.h"
-#include "base/components/input.h"
-#include "base/components/input_adapter.h"
+#include "base/input.h"
+#include "base/input_adapter.h"
 
 
 #endif  // __BASE_H__
