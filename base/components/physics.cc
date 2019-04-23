@@ -20,7 +20,7 @@ Physics::Physics()
 
 Physics::~Physics() {
   auto& v = Physics::physics_children;
-  if (auto iter = std::find(v.begin(), v.end(), this); iter == v.end()) {
+  if (auto iter = std::find(v.begin(), v.end(), this); iter != v.end()) {
     v.erase(iter);
   }
   this->collision = nullptr;

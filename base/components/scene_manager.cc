@@ -19,5 +19,6 @@ void SceneManager::Play() {
     current_scene->UpdateChildren();
     Physics::UpdateAll();
     current_scene->RenderChildren();
+    current_scene->RemoveMarkedChild();
   }
 }

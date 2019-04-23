@@ -15,11 +15,15 @@ class Node {
 
   void UpdateChildren();
   void RenderChildren();
+  void RemoveMarkedChild();
   void AddChild(std::shared_ptr<Node> child);
   void Clear();
+  void Erase() { erase_mark = true; }
+  bool IsErase() { return erase_mark; }
 
  private:
   std::vector<std::shared_ptr<Node>> children;
+  bool erase_mark;
 };
 
 #endif  // __NODE_H__
