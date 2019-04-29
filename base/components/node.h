@@ -20,9 +20,11 @@ class Node {
   void Clear();
   void Erase() { erase_mark = true; }
   bool IsErase() { return erase_mark; }
+  Node* GetParent() { return parent; }
 
  private:
   std::vector<std::shared_ptr<Node>> children;
+  Node* parent;
   bool erase_mark;
 };
 

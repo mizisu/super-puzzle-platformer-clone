@@ -8,8 +8,8 @@ Sprite::Sprite() : texture(nullptr), angle(0), is_flip_horz(false) {
   center = {0, 0};
 }
 
-Sprite::Sprite(const std::string& filename) : Sprite() {
-  SetTexture(TextureManager::GetInstance().GetTexture(filename));
+Sprite::Sprite(const std::string& path) : Sprite() {
+  SetTexture(TextureManager::GetInstance().GetTexture(path));
 }
 
 Sprite::~Sprite() {}
@@ -34,6 +34,6 @@ void Sprite::SetTexture(std::shared_ptr<Texture> texture) {
   src_rect.h = height;
 }
 
-void Sprite::SetTexture(const std::string& filename) {
-  SetTexture(TextureManager::GetInstance().GetTexture(filename));
+void Sprite::SetTexture(const std::string& path) {
+  SetTexture(TextureManager::GetInstance().GetTexture(path));
 }

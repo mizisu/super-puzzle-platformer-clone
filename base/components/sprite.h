@@ -8,7 +8,7 @@ class Texture;
 class Sprite : public Node {
  public:
   Sprite();
-  Sprite(const std::string& filename);
+  Sprite(const std::string& path);
   virtual ~Sprite();
 
   virtual void Update() override;
@@ -29,7 +29,7 @@ class Sprite : public Node {
 
   void FlipHorizontal(bool is_flip) { is_flip_horz = is_flip; }
   void SetTexture(std::shared_ptr<Texture> texture);
-  void SetTexture(const std::string& filename);
+  void SetTexture(const std::string& path);
 
  protected:
   std::shared_ptr<Texture> texture;

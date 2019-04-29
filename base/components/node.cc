@@ -34,6 +34,9 @@ void Node::RemoveMarkedChild() {
   }
 }
 
-void Node::AddChild(std::shared_ptr<Node> child) { children.push_back(child); }
+void Node::AddChild(std::shared_ptr<Node> child) {
+  child->parent = this;
+  children.push_back(child);
+}
 
 void Node::Clear() { children.clear(); }
