@@ -10,6 +10,7 @@ class Bullet : public Sprite, public Physics {
   Bullet(int level, bool flip);
   virtual ~Bullet() = default;
   virtual void Update() override;
+  void AddEffect();
 
  private:
   bool flip;

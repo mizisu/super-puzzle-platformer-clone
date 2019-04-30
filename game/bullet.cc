@@ -9,13 +9,10 @@ Bullet::Bullet(int level, bool flip) : flip(false) {
   this->EnableGravity(false);
   this->flip = flip;
   this->Collision([&](auto other, auto result) {
-    if(auto block = dynamic_cast<Block*>(other); block != nullptr) {
+    if (auto block = dynamic_cast<Block*>(other); block != nullptr) {
       block->Hit();
       this->Erase();
-      auto effect = std::make_shared<Effect>();
-      effect->X() = this->X();
-      effect->Y() = this->Y() - (effect->Height() / 2);
-      this->GetParent()->AddChild(effect);
+      AddEffect();
     }
   });
 }
@@ -33,4 +30,11 @@ void Bullet::Update() {
   if (this->X() < left_end || this->X() > right_end) {
     this->Erase();
   }
+}
+
+void Bullet::AddEffect() {
+  auto effect = std::make_shared<Effect>();
+  effect->X() = this->X();
+  effect->Y() = this->Y() - (effect->Height() / 2);
+  this->GetParent()->AddChild(effect);
 }
