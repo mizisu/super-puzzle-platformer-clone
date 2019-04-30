@@ -15,6 +15,7 @@ class Block : public Physics, public Sprite {
  public:
   Block();
   BlockType Type() { return type; }
+  virtual int GetMaxY() { return max_y; }
   virtual void Hit() = 0;
   virtual void Update() override;
   void SetBlockX(int x);

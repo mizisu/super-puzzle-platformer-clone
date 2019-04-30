@@ -14,6 +14,7 @@ class BlockManager : public Node {
   virtual void Update() override;
   void CreateDefaultBlocks();
   void CreateNewBlock();
+  void CreateThornBlock();
 
   auto& Blocks() { return blocks; }
 

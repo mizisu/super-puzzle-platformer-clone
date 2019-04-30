@@ -1,6 +1,7 @@
 #include "game/block_manager.h"
 #include "base/input_adapter.h"
 #include "game/normal_block.h"
+#include "game/thorn_block.h"
 
 InputAdapter adapter;
 
@@ -41,11 +42,20 @@ void BlockManager::CreateNewBlock() {
   }
 }
 
-void BlockManager::CreateBlock(int i, int j) {
+void BlockManager::CreateThornBlock() {
+  int x = random.Get(0, BlockMaxColumn);
+  auto block = std::make_shared<ThornBlock>();
+  block->SetBlockPosX(x);
+  block->SetBlockPosY(0);
+  blocks[x][0] = block.get();
+  this->AddChild(block);
+}
+
+void BlockManager::CreateBlock(int x, int y) {
   auto block = std::make_shared<NormalBlock>();
-  block->SetBlockPosX(i);
-  block->SetBlockPosY(j);
-  blocks[i][j] = block.get();
+  block->SetBlockPosX(x);
+  block->SetBlockPosY(y);
+  blocks[x][y] = block.get();
   this->AddChild(block);
 }
 

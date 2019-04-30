@@ -9,4 +9,3 @@ https://store.steampowered.com/app/238530/Super_Puzzle_Platformer_Deluxe/
   - drop block
   - thron block
   - laser
-  
