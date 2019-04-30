@@ -39,7 +39,7 @@ void AnimationSprite::SetAnimationTexture(const std::string& path,
 void AnimationSprite::Update() {
   current_frame += animaion_speed * Global::DeltaTime;
 
-  this->src_rect.x = (int)current_frame;
+  this->src_rect.x = (int)current_frame * this->Width();
 
   if (this->IsEndAnimation() && this->repeat_animation) {
     RestartAnimation();

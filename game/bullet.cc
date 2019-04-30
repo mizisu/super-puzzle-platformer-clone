@@ -1,5 +1,6 @@
 #include "game/bullet.h"
 #include "game/block.h"
+#include "game/effect.h"
 
 using namespace std::string_literals;
 
@@ -11,6 +12,10 @@ Bullet::Bullet(int level, bool flip) : flip(false) {
     if(auto block = dynamic_cast<Block*>(other); block != nullptr) {
       block->Hit();
       this->Erase();
+      auto effect = std::make_shared<Effect>();
+      effect->X() = this->X();
+      effect->Y() = this->Y() - (effect->Height() / 2);
+      this->GetParent()->AddChild(effect);
     }
   });
 }
