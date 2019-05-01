@@ -1,4 +1,5 @@
 #include "game/block_manager.h"
+#include "base/camera.h"
 #include "base/input_adapter.h"
 #include "game/normal_block.h"
 #include "game/thorn_block.h"
@@ -151,4 +152,5 @@ void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
       }
     }
   }
+  Camera::GetInstance().Shake(std::min(count * 5, 30), 500);
 }

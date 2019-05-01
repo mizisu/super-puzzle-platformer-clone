@@ -11,8 +11,6 @@ NormalBlock::NormalBlock() : life(BlockLife) {
   this->SetTexture(block_images[life]);
 }
 
-NormalBlock::~NormalBlock() {}
-
 void NormalBlock::Hit() {
   this->life -= 1;
   if (life <= 0) life = 0;

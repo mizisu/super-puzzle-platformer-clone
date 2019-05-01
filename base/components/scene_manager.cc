@@ -1,4 +1,5 @@
 #include "base/components/scene_manager.h"
+#include "base/camera.h"
 #include "base/components/physics.h"
 
 SceneManager::SceneManager() : current_scene(nullptr) {}
@@ -18,6 +19,7 @@ void SceneManager::Play() {
   if (current_scene) {
     Physics::UpdateAll();
     current_scene->UpdateChildren();
+    Camera::GetInstance().Update();
     current_scene->RenderChildren();
     current_scene->RemoveMarkedChild();
   }

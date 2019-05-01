@@ -16,7 +16,7 @@ class Node {
   void RemoveMarkedChild();
   void AddChild(std::shared_ptr<Node> child);
   void Clear();
-  void Erase() { erase_mark = true; }
+  virtual void Erase() { erase_mark = true; }
   bool IsErase() { return erase_mark; }
   Node* GetParent() { return parent; }
 
