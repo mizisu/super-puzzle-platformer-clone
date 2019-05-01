@@ -9,11 +9,12 @@ class NormalBlock : public Block {
  public:
   NormalBlock();
   virtual ~NormalBlock();
+  virtual bool IsDead() override { return this->life <= 0; }
   virtual void Hit() override;
+  virtual void ChangeHitEffectTexture() override;
 
  private:
   void LoadImages();
-  void HitInternal();
 
  private:
   static RandomGenerator rand;

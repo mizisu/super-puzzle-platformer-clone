@@ -2,8 +2,6 @@
 #include "game/block.h"
 #include "game/effect.h"
 
-using namespace std::string_literals;
-
 Bullet::Bullet(int level, bool flip) : flip(false) {
   this->SetTexture("play/player/lv"s + std::to_string(level) + ".png"s);
   this->EnableGravity(false);

@@ -15,20 +15,28 @@ class Block : public Physics, public Sprite {
  public:
   Block();
   virtual ~Block() = default;
-  BlockType Type() { return type; }
+  BlockType GetBlockType() { return type; }
   virtual int GetMaxY() { return max_y; }
   virtual void Hit() = 0;
+  virtual void ChangeHitEffectTexture(){};
   virtual void Update() override;
+  virtual bool IsDead() { return false; }
   void SetBlockX(int x);
   void SetBlockPosX(int x);
+  int GetBlockX() { return this->block_x; }
   void SetBlockY(int y);
   void SetBlockPosY(int y);
+  int GetBlockY() { return this->block_y; }
+  void OnHitByBullet(std::function<void(Block* block)> func) {
+    this->on_hit = func;
+  }
 
  protected:
   BlockType type;
   int block_x;
   int block_y;
   int max_y;
+  std::function<void(Block* block)> on_hit;
 };
 
 #endif  // __BLOCK_H__

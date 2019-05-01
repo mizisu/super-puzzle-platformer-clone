@@ -18,5 +18,6 @@
 #include "base/input.h"
 #include "base/input_adapter.h"
 
+using namespace std::string_literals;
 
 #endif  // __BASE_H__

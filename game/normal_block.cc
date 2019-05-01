@@ -14,19 +14,22 @@ NormalBlock::NormalBlock() : life(BlockLife) {
 NormalBlock::~NormalBlock() {}
 
 void NormalBlock::Hit() {
-  timer.SetInterval(
+  this->life -= 1;
+  if (life <= 0) life = 0;
+  ChangeHitEffectTexture();
+}
+
+void NormalBlock::ChangeHitEffectTexture() {
+  if (life >= block_damaged_images.size())
+    this->SetTexture(block_damaged_images[life - 1]);
+  else
+    this->SetTexture(block_damaged_images[life]);
+  timer.SetTimeout(
       [&]() {
         this->SetTexture(this->block_images[life]);
         timer.Stop();
       },
       100);
-  HitInternal();
-}
-
-void NormalBlock::HitInternal() {
-  this->life -= 1;
-  if (life <= 0) life = 0;
-  this->SetTexture(block_damaged_images[life]);
 }
 
 void NormalBlock::LoadImages() {

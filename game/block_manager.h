@@ -2,13 +2,14 @@
 #define __BLOCK_MANAGER_H__
 
 #include "base/components/node.h"
+#include "game/block.h"
 
-class Block;
-
-const int BlockMaxColumn = 8;
-const int BlockMaxRow = 12;
+const int MaxBlockColumn = 8;
+const int MaxBlockRow = 12;
 
 class BlockManager : public Node {
+  using BlockVistedSet = std::bitset<MaxBlockRow>*;
+
  public:
   BlockManager();
   virtual void Update() override;
@@ -19,12 +20,18 @@ class BlockManager : public Node {
   auto& Blocks() { return blocks; }
 
  private:
+  Block* GetBlock(int x, int y);
   void CreateBlock(int x, int y);
   void UpdateBlock(Block* block, int x, int y);
   void CheckAndSwapBelowBlock(int x, int y);
+  bool CanHit(BlockVistedSet visited, Block* block, BlockType blockType);
+  void HitConnectedBlock(Block* block);
+  bool HitConnectedBlockInternal(BlockVistedSet visited, Block* block,
+                                 BlockType blockType);
+  void EraseConnectedBlocks(Block* block);
 
  private:
-  Block* blocks[BlockMaxColumn][BlockMaxRow];
+  Block* blocks[MaxBlockColumn][MaxBlockRow];
   RandomGenerator random;
 };
 
