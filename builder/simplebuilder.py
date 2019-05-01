@@ -23,7 +23,7 @@ async def com(root, file, obj_file):
     (_, result) = await proc.communicate()
     if result:
         print()
-        print(str(result))
+        print(result.decode('utf-8'))
 
 
 async def build(root: str):
