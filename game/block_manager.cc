@@ -79,7 +79,7 @@ void BlockManager::CheckAndSwapBelowBlock(int x, int y) {
   }
 }
 
-bool BlockManager::CanHit(BlockVistedSet visited, Block* block,
+bool BlockManager::CanHit(const BlockVistedSet& visited, Block* block,
                           BlockType blockType) {
   if (block == nullptr || block->GetBlockType() != blockType) return false;
   auto x = block->GetBlockX();
@@ -92,15 +92,17 @@ bool BlockManager::CanHit(BlockVistedSet visited, Block* block,
 }
 
 void BlockManager::HitConnectedBlock(Block* block) {
-  std::bitset<MaxBlockRow> visited[MaxBlockColumn];
+  BlockVistedSet visited;
+  visited.resize(MaxBlockColumn);
+
   bool hit =
       this->HitConnectedBlockInternal(visited, block, block->GetBlockType());
   if (hit == false) {
-    std::cout << "erase blocks" << std::endl;
+    EraseBlocks(visited);
   }
 }
 
-bool BlockManager::HitConnectedBlockInternal(BlockVistedSet visited,
+bool BlockManager::HitConnectedBlockInternal(BlockVistedSet& visited,
                                              Block* block,
                                              BlockType blockType) {
   auto x = block->GetBlockX();
@@ -136,4 +138,17 @@ bool BlockManager::HitConnectedBlockInternal(BlockVistedSet visited,
   }
 
   return false;
+}
+
+void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
+  int count = 0;
+  for (int x = 0; x < visited.size(); x++) {
+    for (int y = 0; y < visited[x].size(); y++) {
+      if (visited[x][y]) {
+        ++count;
+        blocks[x][y]->Erase();
+        blocks[x][y] = nullptr;
+      }
+    }
+  }
 }

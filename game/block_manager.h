@@ -8,7 +8,7 @@ const int MaxBlockColumn = 8;
 const int MaxBlockRow = 12;
 
 class BlockManager : public Node {
-  using BlockVistedSet = std::bitset<MaxBlockRow>*;
+  using BlockVistedSet = std::vector<std::bitset<MaxBlockRow>>;
 
  public:
   BlockManager();
@@ -24,11 +24,11 @@ class BlockManager : public Node {
   void CreateBlock(int x, int y);
   void UpdateBlock(Block* block, int x, int y);
   void CheckAndSwapBelowBlock(int x, int y);
-  bool CanHit(BlockVistedSet visited, Block* block, BlockType blockType);
+  bool CanHit(const BlockVistedSet& visited, Block* block, BlockType blockType);
   void HitConnectedBlock(Block* block);
-  bool HitConnectedBlockInternal(BlockVistedSet visited, Block* block,
+  bool HitConnectedBlockInternal(BlockVistedSet& visited, Block* block,
                                  BlockType blockType);
-  void EraseConnectedBlocks(Block* block);
+  void EraseBlocks(const BlockVistedSet& visited);
 
  private:
   Block* blocks[MaxBlockColumn][MaxBlockRow];
