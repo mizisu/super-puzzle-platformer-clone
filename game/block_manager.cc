@@ -145,11 +145,10 @@ void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
   int count = 0;
   for (int x = 0; x < visited.size(); x++) {
     for (int y = 0; y < visited[x].size(); y++) {
-      if (visited[x][y]) {
-        ++count;
-        blocks[x][y]->Erase();
-        blocks[x][y] = nullptr;
-      }
+      if (!visited[x][y]) continue;
+      ++count;
+      blocks[x][y]->Erase();
+      blocks[x][y] = nullptr;
     }
   }
   Camera::GetInstance().Shake(std::min(count * 5, 30), 500);
