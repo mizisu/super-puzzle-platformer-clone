@@ -14,6 +14,7 @@ enum class BlockType {
 class Block : public Physics, public Sprite {
  public:
   Block();
+  virtual ~Block() = default;
   BlockType Type() { return type; }
   virtual int GetMaxY() { return max_y; }
   virtual void Hit() = 0;

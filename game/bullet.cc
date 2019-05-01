@@ -10,7 +10,6 @@ Bullet::Bullet(int level, bool flip) : flip(false) {
   this->flip = flip;
   this->Collision([&](auto other, auto result) {
     if (auto block = dynamic_cast<Block*>(other); block != nullptr) {
-      block->Hit();
       this->Erase();
       AddEffect();
     }

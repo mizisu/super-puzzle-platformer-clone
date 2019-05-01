@@ -16,8 +16,8 @@ void SceneManager::Push(Scene* scene) {
 
 void SceneManager::Play() {
   if (current_scene) {
-    current_scene->UpdateChildren();
     Physics::UpdateAll();
+    current_scene->UpdateChildren();
     current_scene->RenderChildren();
     current_scene->RemoveMarkedChild();
   }

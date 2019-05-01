@@ -23,8 +23,6 @@ void NormalBlock::Hit() {
   HitInternal();
 }
 
-void NormalBlock::Update() { base::Update(); }
-
 void NormalBlock::HitInternal() {
   this->life -= 1;
   if (life <= 0) life = 0;

@@ -4,6 +4,11 @@
 const int BlockHeight = 96;
 
 Block::Block() : block_x(0), block_y(0), max_y(0) {
+  this->Collision([&](auto other, auto result) {
+    if(auto bullet = dynamic_cast<Bullet*>(other); bullet != nullptr) {
+      this->Hit();
+    }
+  });
 }
 
 void Block::Update() {

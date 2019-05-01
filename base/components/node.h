@@ -3,8 +3,6 @@
 
 #include "base/base.h"
 
-class PhysicsSprite;
-
 class Node {
  public:
   Node();

@@ -10,7 +10,6 @@ class NormalBlock : public Block {
   NormalBlock();
   virtual ~NormalBlock();
   virtual void Hit() override;
-  virtual void Update() override;
 
  private:
   void LoadImages();
