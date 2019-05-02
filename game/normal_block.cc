@@ -26,7 +26,7 @@ void NormalBlock::ChangeHitEffectTexture() {
   else
     this->SetTexture(block_damaged_images[life]);
 
-  this->AddChild(NodeTask::Interval(
+  this->AddChild(NodeTask::After(
       [&]() { this->SetTexture(this->block_images[life]); }, 1));
 }
 

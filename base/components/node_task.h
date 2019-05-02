@@ -5,7 +5,7 @@
 
 class NodeTask : public Node {
  public:
-  static auto Interval(std::function<void()> function, double interval) {
+  static auto After(std::function<void()> function, double interval) {
     auto task = std::make_shared<NodeTask>();
     task->function = function;
     task->interval = interval;
