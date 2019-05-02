@@ -3,10 +3,16 @@
 
 #include "base/components/node.h"
 
+class Score;
+
 class UiLayer : public Node {
  public:
   UiLayer();
   virtual ~UiLayer() = default;
+  void AddScore(long num);
+
+ private:
+  std::shared_ptr<Score> score;
 };
 
 #endif  // __UI_LAYER_H__

@@ -8,7 +8,10 @@ const double JumpForce = -200;
 const int animation_frame_count = 4;
 
 Player::Player()
-    : state(PlayerState::Stand), texture_stand(nullptr), texture_move(nullptr) {
+    : state(PlayerState::Stand),
+      texture_stand(nullptr),
+      texture_move(nullptr),
+      energy(0) {
   this->texture_stand =
       TextureManager::GetInstance().GetTexture("play/player/stand.png");
 
@@ -41,6 +44,8 @@ void Player::Update() {
       Input::GetInstance().IsKeyUp(SDL_SCANCODE_RIGHT)) {
     this->SetAnimationTexture(this->texture_stand, animation_frame_count);
   }
+
+  if (this->energy < 0) this->Kill();
 
   this->EnableGravity(true);
 }
@@ -91,3 +96,5 @@ void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
     if (this->X() >= result.x) this->X() += result.w;
   }
 }
+
+void Player::Kill() {}

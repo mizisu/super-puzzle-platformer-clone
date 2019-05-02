@@ -17,12 +17,11 @@ Score::Score() : score(0), current_score(0) {
     this->AddChild(sp);
     this->sprites.push_back(sp);
   }
-  this->Add(153);
 }
 
 void Score::Update() {
   if (this->current_score < this->score) {
-    this->current_score += rand.Get(1, 10);
+    this->current_score += rand.Get(1, 100);
     this->current_score = std::min(this->current_score, this->score);
     auto temp = this->current_score;
     int i = 0;

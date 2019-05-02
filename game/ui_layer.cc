@@ -21,6 +21,8 @@ UiLayer::UiLayer() {
   max->Y() = UiTopPad - 17;
   this->AddChild(max);
 
-  auto score = std::make_shared<Score>();
+  this->score = std::make_shared<Score>();
   this->AddChild(score);
 }
+
+void UiLayer::AddScore(long num) { this->score->Add(num); }

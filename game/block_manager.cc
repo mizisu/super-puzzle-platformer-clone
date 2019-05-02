@@ -6,7 +6,7 @@
 
 InputAdapter adapter;
 
-BlockManager::BlockManager() {
+BlockManager::BlockManager() : on_break_block(nullptr) {
   CreateDefaultBlocks();
 
   // TODO: remove test code
@@ -152,4 +152,5 @@ void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
     }
   }
   Camera::GetInstance().Shake(std::min(count * 5, 30), 500);
+  if (this->on_break_block != nullptr) on_break_block(count);
 }

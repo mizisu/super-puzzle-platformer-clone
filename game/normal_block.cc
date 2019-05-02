@@ -1,4 +1,5 @@
 #include "game/normal_block.h"
+#include "base/components/node_task.h"
 #include "base/components/texture_manager.h"
 
 const int BlockLife = 2;
@@ -11,6 +12,8 @@ NormalBlock::NormalBlock() : life(BlockLife) {
   this->SetTexture(block_images[life]);
 }
 
+void NormalBlock::Update() { base::Update(); }
+
 void NormalBlock::Hit() {
   this->life -= 1;
   if (life <= 0) life = 0;
@@ -22,12 +25,9 @@ void NormalBlock::ChangeHitEffectTexture() {
     this->SetTexture(block_damaged_images[life - 1]);
   else
     this->SetTexture(block_damaged_images[life]);
-  timer.SetTimeout(
-      [&]() {
-        this->SetTexture(this->block_images[life]);
-        timer.Stop();
-      },
-      100);
+
+  this->AddChild(NodeTask::Interval(
+      [&]() { this->SetTexture(this->block_images[life]); }, 1));
 }
 
 void NormalBlock::LoadImages() {

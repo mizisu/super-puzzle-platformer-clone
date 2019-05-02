@@ -7,13 +7,19 @@
 
 GameScene::GameScene() {
   this->AddChild(std::make_shared<BackgroundLayer>());
-  this->AddChild(std::make_shared<BlockManager>());
+  auto block_manager = std::make_shared<BlockManager>();
+  this->AddChild(block_manager);
   auto weapon = std::make_shared<Weapon>();
   this->AddChild(weapon);
   auto player = std::make_shared<Player>();
   weapon->SetPlayer(player);
   this->AddChild(player);
-  this->AddChild(std::make_shared<UiLayer>());
+  ui = std::make_shared<UiLayer>();
+  this->AddChild(ui);
+
+  block_manager->OnBreakBlock([&](int count) {
+    this->ui->AddScore(count * rand.Get(1, 30) * rand.Get(1, 30));
+  });
 }
 
 GameScene::~GameScene() {}

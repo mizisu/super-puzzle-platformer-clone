@@ -24,12 +24,14 @@ class Player : public AnimationSprite, public Physics {
   void Move(double force);
   void Jump();
   void CollisionBlock(Block* block, const SDL_Rect& result);
+  void Kill();
 
  private:
   InputAdapter input_adapter;
   PlayerState state;
   std::shared_ptr<Texture> texture_stand;
   std::shared_ptr<Texture> texture_move;
+  int energy;
 };
 
 #endif  // __PLAYER_H__

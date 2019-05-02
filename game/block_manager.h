@@ -16,6 +16,7 @@ class BlockManager : public Node {
   void CreateDefaultBlocks();
   void CreateNewBlock();
   void CreateThornBlock();
+  void OnBreakBlock(std::function<void(int)> func) { on_break_block = func; }
 
   auto& Blocks() { return blocks; }
 
@@ -33,6 +34,7 @@ class BlockManager : public Node {
  private:
   Block* blocks[MaxBlockColumn][MaxBlockRow];
   RandomGenerator random;
+  std::function<void(int)> on_break_block;
 };
 
 #endif  // __BLOCK_MANAGER_H__

@@ -9,6 +9,7 @@ class NormalBlock : public Block {
  public:
   NormalBlock();
   virtual ~NormalBlock() = default;
+  virtual void Update() override;
   virtual bool IsDead() override { return this->life <= 0; }
   virtual void Hit() override;
   virtual void ChangeHitEffectTexture() override;
@@ -22,7 +23,6 @@ class NormalBlock : public Block {
   int life;
   std::vector<std::shared_ptr<Texture>> block_images;
   std::vector<std::shared_ptr<Texture>> block_damaged_images;
-  Timer timer;
 };
 
 #endif  // __NORMAL_BLOCK_H__
