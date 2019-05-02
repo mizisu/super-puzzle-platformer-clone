@@ -19,14 +19,12 @@ void AnimationSprite::SetAnimationTexture(std::shared_ptr<Texture> texture,
   this->SetTexture(texture);
   this->frame_count = frame_count;
   this->animaion_speed = animaion_speed;
-  this->width = this->texture->Width() / this->frame_count;
+  this->dest_rect.w = this->texture->Width() / this->frame_count;
 
-  this->src_rect.w = this->width;
-  this->src_rect.h = this->height;
+  this->src_rect.w = this->dest_rect.w;
+  this->src_rect.h = this->dest_rect.h;
   this->src_rect.x = 0;
   this->src_rect.y = 0;
-
-  this->dest_rect.w = this->width;
 }
 
 void AnimationSprite::SetAnimationTexture(const std::string& path,

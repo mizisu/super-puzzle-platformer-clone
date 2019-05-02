@@ -12,7 +12,7 @@ bool Application::Initialize() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
       throw std::string("SDL Init Error : ") + SDL_GetError();
 
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
     auto window = SDL_CreateWindow("super-puzzle-platformer-clone",
                                    SDL_WINDOWPOS_UNDEFINED,

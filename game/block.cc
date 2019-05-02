@@ -23,7 +23,7 @@ void Block::Update() {
 void Block::SetBlockX(int x) { block_x = x; }
 
 void Block::SetBlockPosX(int x) {
-  this->X() = x * this->width + Global::LeftPad;
+  this->X() = x * this->Width() + Global::LeftPad;
   SetBlockX(x);
 }
 

@@ -12,6 +12,11 @@ Sprite::Sprite(const std::string& path) : Sprite() {
   SetTexture(TextureManager::GetInstance().GetTexture(path));
 }
 
+Sprite::Sprite(const std::string& path, int x, int y) : Sprite(path) {
+  this->X() = x;
+  this->Y() = y;
+}
+
 Sprite::~Sprite() {}
 
 void Sprite::Update() {}
@@ -19,21 +24,22 @@ void Sprite::Update() {}
 void Sprite::Render() {
   int flip = SDL_FLIP_NONE;
   if (is_flip_horz) flip |= SDL_FLIP_HORIZONTAL;
-
   SDL_RenderCopyEx(Global::Renderer, texture->SDLTexture(), &src_rect,
                    &dest_rect, angle, &center, (SDL_RendererFlip)flip);
 }
 
 void Sprite::SetTexture(std::shared_ptr<Texture> texture) {
   this->texture = texture;
-  width = texture->Width();
-  height = texture->Height();
-  dest_rect.w = width;
-  dest_rect.h = height;
-  src_rect.w = width;
-  src_rect.h = height;
+  this->dest_rect.w = texture->Width();
+  this->dest_rect.h = texture->Height();
+  src_rect.w = this->dest_rect.w;
+  src_rect.h = this->dest_rect.h;
 }
 
 void Sprite::SetTexture(const std::string& path) {
   SetTexture(TextureManager::GetInstance().GetTexture(path));
+}
+
+void Sprite::SetAlpha(float opacity) {
+  SDL_SetTextureAlphaMod(this->texture->SDLTexture(), 255 * opacity);
 }

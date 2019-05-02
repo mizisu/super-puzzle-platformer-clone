@@ -9,6 +9,7 @@ class Sprite : public Node {
  public:
   Sprite();
   Sprite(const std::string& path);
+  Sprite(const std::string& path, int x, int y);
   virtual ~Sprite();
 
   virtual void Update() override;
@@ -24,12 +25,13 @@ class Sprite : public Node {
   SDL_Rect& DestRect() { return dest_rect; }
   bool IsFlipHorizontal() { return is_flip_horz; }
 
-  virtual int Width() { return width; }
-  virtual int Height() { return height; }
+  virtual int Width() { return dest_rect.w; }
+  virtual int Height() { return dest_rect.h; }
 
   void FlipHorizontal(bool is_flip) { is_flip_horz = is_flip; }
   void SetTexture(std::shared_ptr<Texture> texture);
   void SetTexture(const std::string& path);
+  void SetAlpha(float opacity);
 
  protected:
   std::shared_ptr<Texture> texture;
@@ -39,8 +41,6 @@ class Sprite : public Node {
   double angle;
   SDL_RendererFlip flip;
   bool is_flip_horz;
-  float width;
-  float height;
 };
 
 #endif  // __SPRITE_H__

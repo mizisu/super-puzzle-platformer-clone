@@ -2,6 +2,7 @@
 #include "game/background_layer.h"
 #include "game/block_manager.h"
 #include "game/player.h"
+#include "game/ui_layer.h"
 #include "game/weapon.h"
 
 GameScene::GameScene() {
@@ -12,7 +13,7 @@ GameScene::GameScene() {
   auto player = std::make_shared<Player>();
   weapon->SetPlayer(player);
   this->AddChild(player);
-  
+  this->AddChild(std::make_shared<UiLayer>());
 }
 
 GameScene::~GameScene() {}
