@@ -15,10 +15,15 @@ enum class PlayerState {
 
 class Player : public AnimationSprite, public Physics {
   using base = AnimationSprite;
+
  public:
   Player();
   virtual ~Player();
   virtual void Update() override;
+  int GetEnergy() { return energy; }
+  void AddEnerge(int value) {
+    this->energy = std::min(this->energy + value, 100);
+  }
 
  private:
   void Move(double force);

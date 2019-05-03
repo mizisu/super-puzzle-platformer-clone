@@ -6,6 +6,8 @@
 class Sprite;
 
 class Physics {
+  using CollisionFunc = std::function<void(Sprite*, const SDL_Rect&)>;
+
  public:
   static void UpdateAll();
 
@@ -16,6 +18,10 @@ class Physics {
   Physics();
   virtual ~Physics();
   void EnableGravity(bool enable);
+  void Collision(CollisionFunc fn) { collision_functions.push_back(fn); }
+  void ForceX(double force) { velocity_x = force; }
+  void ForceY(double force) { velocity_y = force; }
+  bool IsFalling() { return velocity_y > 0; }
 
  private:
   bool IsSprite() { return this->GetSprite() != nullptr; }
@@ -24,20 +30,12 @@ class Physics {
   void CheckCollision();
   void Intersect(Sprite* other);
 
- protected:
-  void Collision(std::function<void(Sprite*, const SDL_Rect&)> fn) {
-    collision = fn;
-  }
-  void ForceX(double force) { velocity_x = force; }
-  void ForceY(double force) { velocity_y = force; }
-  bool IsFalling() { return velocity_y > 0; }
-
  private:
   double acceleration;
   double velocity_y;
   double velocity_x;
   bool enable_gravity;
-  std::function<void(Sprite*, const SDL_Rect& result)> collision;
+  std::vector<CollisionFunc> collision_functions;
   Sprite* sprite;
 };
 

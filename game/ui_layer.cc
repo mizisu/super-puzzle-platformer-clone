@@ -1,5 +1,6 @@
 #include "game/ui_layer.h"
 #include "base/components/animation_sprite.h"
+#include "base/components/bar_sprite.h"
 #include "base/components/sprite.h"
 #include "game/score.h"
 
@@ -9,7 +10,11 @@ UiLayer::UiLayer() {
   auto black = std::make_shared<Sprite>("play/ui/black.png");
   black->SetAlpha(0.5);
   this->AddChild(black);
-  auto lvbar = std::make_shared<Sprite>("play/ui/lvbar.png", 98, UiTopPad);
+  this->lvbar = std::make_shared<BarSprite>();
+  this->lvbar->SetTexture("play/ui/lvbar.png");
+  this->lvbar->SetMinMax(0, 100);
+  this->lvbar->X() = 98;
+  this->lvbar->Y() = UiTopPad;
   this->AddChild(lvbar);
 
   this->AddChild(std::make_shared<Sprite>("play/ui/x1.png", 0, UiTopPad));
@@ -26,3 +31,5 @@ UiLayer::UiLayer() {
 }
 
 void UiLayer::AddScore(long num) { this->score->Add(num); }
+
+void UiLayer::SetEnerge(int value) { this->lvbar->SetValue(value); }

@@ -18,17 +18,16 @@ Physics::Physics()
       acceleration(15),
       velocity_x(0),
       velocity_y(0),
-      collision(nullptr),
       sprite(nullptr) {
   Physics::physics_children.push_back(this);
 }
 
 Physics::~Physics() {
+  this->collision_functions.clear();
   auto& v = Physics::physics_children;
   if (auto iter = std::find(v.begin(), v.end(), this); iter != v.end()) {
     v.erase(iter);
   }
-  this->collision = nullptr;
   this->sprite = nullptr;
 }
 
@@ -54,7 +53,7 @@ void Physics::UpdatePosition() {
 }
 
 void Physics::CheckCollision() {
-  if (this->collision == nullptr) return;
+  if (this->collision_functions.size() == 0) return;
   for (auto& other : Physics::physics_children) {
     if (other->IsSprite() && this != other) Intersect(other->GetSprite());
   }
@@ -65,6 +64,8 @@ void Physics::Intersect(Sprite* other) {
   auto& other_rect = other->DestRect();
   SDL_Rect result;
   if (SDL_IntersectRect(&rect, &other_rect, &result)) {
-    this->collision(other, result);
+    for (auto& func : this->collision_functions) {
+      func(other, result);
+    }
   }
 }

@@ -9,7 +9,6 @@ class NormalBlock : public Block {
  public:
   NormalBlock();
   virtual ~NormalBlock() = default;
-  virtual void Update() override;
   virtual bool IsDead() override { return this->life <= 0; }
   virtual void Hit() override;
   virtual void ChangeHitEffectTexture() override;

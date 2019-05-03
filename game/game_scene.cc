@@ -1,6 +1,7 @@
 #include "game/game_scene.h"
 #include "game/background_layer.h"
 #include "game/block_manager.h"
+#include "game/item.h"
 #include "game/player.h"
 #include "game/ui_layer.h"
 #include "game/weapon.h"
@@ -11,15 +12,29 @@ GameScene::GameScene() {
   this->AddChild(block_manager);
   auto weapon = std::make_shared<Weapon>();
   this->AddChild(weapon);
-  auto player = std::make_shared<Player>();
+  this->player = std::make_shared<Player>();
   weapon->SetPlayer(player);
   this->AddChild(player);
-  ui = std::make_shared<UiLayer>();
+  this->ui = std::make_shared<UiLayer>();
+  this->ui->SetEnerge(0);
   this->AddChild(ui);
 
   block_manager->OnBreakBlock([&](int count) {
     this->ui->AddScore(count * rand.Get(1, 30) * rand.Get(1, 30));
+    CreateItem(count);
   });
 }
 
 GameScene::~GameScene() {}
+
+void GameScene::CreateItem(int count) {
+  for (int i = 0; i < count; i++) {
+    auto item = std::make_shared<Item>(rand.Get(1, count * 2));
+    item->Collision([this, &item](auto other, auto result) {
+      if (this->player.get() == other) {
+        this->ui->SetEnerge(this->player->GetEnergy());
+      }
+    });
+    this->AddChild(item);
+  }
+}
