@@ -19,6 +19,9 @@ GameScene::GameScene() {
   this->ui->SetEnerge(0);
   this->AddChild(ui);
 
+  this->player->OnHitByBlock(
+      [&]() { this->ui->SetEnerge(this->player->GetEnergy()); });
+
   block_manager->OnBreakBlock([&](int count) {
     this->ui->AddScore(count * rand.Get(1, 30) * rand.Get(1, 30));
     CreateItem(count);

@@ -4,7 +4,7 @@
 #include "game/block.h"
 
 const double MoveForce = 80;
-const double JumpForce = -200;
+const double JumpForce = -180;
 const int animation_frame_count = 4;
 
 Player::Player()
@@ -81,14 +81,23 @@ void Player::Jump() {
 void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
   int player_center_x = this->X() + (this->Width() / 2);
   int block_center_x = block->X() + (block->Width() / 2);
-  
-  bool is_below_block = this->Y() + (this->Height() / 2) < block->Y();
+
+  bool is_below_block = this->Y() + (this->Height() / 2) - 15 < block->Y();
+  bool is_above_block = this->Y() > block->Y() + block->Height() / 2;
 
   int player_block_center_dist = std::abs(player_center_x - block_center_x);
-  int player_block_dist_max = (this->Width() / 2) + (block->Width() / 2) - 20;
+  int player_block_center_dist_max =
+      (this->Width() / 2) + (block->Width() / 2) - 20;
+
+  if (player_block_center_dist < player_block_center_dist_max &&
+      is_above_block) {
+    this->Y() = block->Y() - this->Height();
+    HitByBlock();
+    return;
+  }
 
   if (this->IsFalling() && is_below_block &&
-      player_block_center_dist < player_block_dist_max) {
+      player_block_center_dist < player_block_center_dist_max) {
     this->Y() = block->Y() - this->Height();
     this->EnableGravity(false);
     this->state = PlayerState::Stand;
@@ -101,6 +110,12 @@ void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
     if (player_center_x > block_center_x)
       this->X() = block->X() + block->Width();
   }
+}
+
+void Player::HitByBlock() {
+  this->energy -= 20;
+  if (this->hit_by_block != nullptr) this->hit_by_block();
+  if (this->energy < 0) Kill();
 }
 
 void Player::Kill() {}

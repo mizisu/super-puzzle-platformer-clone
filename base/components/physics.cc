@@ -15,7 +15,7 @@ void Physics::UpdateAll() {
 
 Physics::Physics()
     : enable_gravity(true),
-      acceleration(15),
+      acceleration(13),
       velocity_x(0),
       velocity_y(0),
       sprite(nullptr) {
