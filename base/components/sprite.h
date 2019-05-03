@@ -27,6 +27,7 @@ class Sprite : public Node {
 
   virtual int Width() { return dest_rect.w; }
   virtual int Height() { return dest_rect.h; }
+  virtual const SDL_Rect& GetCollisionRect() { return dest_rect; }
 
   void FlipHorizontal(bool is_flip) { is_flip_horz = is_flip; }
   void SetTexture(std::shared_ptr<Texture> texture);

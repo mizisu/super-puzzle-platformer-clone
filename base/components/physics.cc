@@ -60,8 +60,8 @@ void Physics::CheckCollision() {
 }
 
 void Physics::Intersect(Sprite* other) {
-  auto& rect = this->GetSprite()->DestRect();
-  auto& other_rect = other->DestRect();
+  auto& rect = this->GetSprite()->GetCollisionRect();
+  auto& other_rect = other->GetCollisionRect();
   SDL_Rect result;
   if (SDL_IntersectRect(&rect, &other_rect, &result)) {
     for (auto& func : this->collision_functions) {

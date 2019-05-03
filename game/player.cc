@@ -75,25 +75,31 @@ void Player::Move(double force) {
 void Player::Jump() {
   this->state = PlayerState::Jump;
   this->ForceY(JumpForce);
+  this->EnableGravity(true);
 }
 
 void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
-  if (this->Y() < block->Y() && this->IsFalling()) {
-    this->state = PlayerState::Stand;
-    this->EnableGravity(false);
+  int player_center_x = this->X() + (this->Width() / 2);
+  int block_center_x = block->X() + (block->Width() / 2);
+  
+  bool is_below_block = this->Y() + (this->Height() / 2) < block->Y();
+
+  int player_block_center_dist = std::abs(player_center_x - block_center_x);
+  int player_block_dist_max = (this->Width() / 2) + (block->Width() / 2) - 20;
+
+  if (this->IsFalling() && is_below_block &&
+      player_block_center_dist < player_block_dist_max) {
     this->Y() = block->Y() - this->Height();
+    this->EnableGravity(false);
+    this->state = PlayerState::Stand;
   }
 
-  // block fall on the player
-  if (this->Y() - block->Y() > this->Height() / 2) {
-    this->Y() = block->Y();
-    return;
-  }
+  if (!is_below_block) {
+    if (player_center_x < block_center_x)
+      this->X() = block->X() - this->Width();
 
-  // check block left right
-  if (this->Y() > block->Y()) {
-    if (this->X() < result.x) this->X() -= result.w;
-    if (this->X() >= result.x) this->X() += result.w;
+    if (player_center_x > block_center_x)
+      this->X() = block->X() + block->Width();
   }
 }
 
