@@ -21,7 +21,7 @@ class Node {
   Node* GetParent() { return parent; }
 
  private:
-  std::vector<std::shared_ptr<Node>> children;
+  std::list<std::shared_ptr<Node>> children;
   Node* parent;
   bool erase_mark;
 };

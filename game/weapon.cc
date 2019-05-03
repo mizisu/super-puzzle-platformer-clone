@@ -3,7 +3,7 @@
 #include "game/player.h"
 
 const int XPad = 25;
-const int YPad = 30;
+const int YPad = 25;
 
 Weapon::Weapon() {
   this->SetTexture("play/player/weapon.png");
@@ -11,8 +11,6 @@ Weapon::Weapon() {
     if (scancode == SDL_SCANCODE_Z) this->Fire();
   });
 }
-
-void Weapon::Update() {}
 
 void Weapon::Render() {
   this->X() = this->player->X();
@@ -27,11 +25,12 @@ void Weapon::Render() {
 }
 
 void Weapon::Fire() {
-  auto bullet = std::make_shared<Bullet>(1, this->IsFlipHorizontal());
+  auto level = std::max(this->player->GetEnergy() / 20, 1);
+  auto bullet = std::make_shared<Bullet>(level, this->IsFlipHorizontal());
   bullet->X() = this->X();
   if (this->IsFlipHorizontal()) {
     this->X() -= XPad;
   }
-  bullet->Y() = this->Y() + YPad;
+  bullet->Y() = this->Y() + YPad - (level * level);
   this->AddChild(bullet);
 }

@@ -7,10 +7,10 @@ class Player;
 
 class Weapon : public Sprite {
   using base = Sprite;
+
  public:
   Weapon();
   virtual ~Weapon() = default;
-  virtual void Update() override;
   virtual void Render() override;
   void SetPlayer(std::shared_ptr<Player> player) { this->player = player; }
   void Fire();

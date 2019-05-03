@@ -8,15 +8,15 @@ void Node::Render() {}
 
 void Node::UpdateChildren() {
   Update();
-  for (auto node : children) {
-    node->UpdateChildren();
+  for (auto it = children.begin(); it != children.end(); it++) {
+    (*it)->UpdateChildren();
   }
 }
 
 void Node::RenderChildren() {
   Render();
-  for (auto node : children) {
-    node->RenderChildren();
+  for (auto it = children.begin(); it != children.end(); it++) {
+    (*it)->RenderChildren();
   }
 }
 
@@ -29,8 +29,8 @@ void Node::RemoveMarkedChild() {
     }
   }
 
-  for (auto node : children) {
-    node->RemoveMarkedChild();
+  for (auto it = children.begin(); it != children.end(); it++) {
+    (*it)->RemoveMarkedChild();
   }
 }
 

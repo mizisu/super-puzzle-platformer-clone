@@ -2,10 +2,11 @@
 #include "game/block.h"
 #include "game/effect.h"
 
-Bullet::Bullet(int level, bool flip) : flip(false) {
+Bullet::Bullet(int level, bool flip) : flip(flip) {
+  level = std::min(level, 4);
   this->SetTexture("play/player/lv"s + std::to_string(level) + ".png"s);
   this->EnableGravity(false);
-  this->flip = flip;
+  this->FlipHorizontal(flip);
   this->Collision([&](auto other, auto result) {
     if (auto block = dynamic_cast<Block*>(other); block != nullptr) {
       this->Erase();
@@ -26,6 +27,7 @@ void Bullet::Update() {
   int right_end = Global::RightEnd - this->Width();
   if (this->X() < left_end || this->X() > right_end) {
     this->Erase();
+    this->AddEffect();
   }
 }
 
