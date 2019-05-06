@@ -25,7 +25,7 @@ void Sprite::Render() {
   int flip = SDL_FLIP_NONE;
   if (is_flip_horz) flip |= SDL_FLIP_HORIZONTAL;
   SDL_RenderCopyEx(Global::Renderer, texture->SDLTexture(), &src_rect,
-                   &dest_rect, angle, &center, (SDL_RendererFlip)flip);
+                   &dest_rect, angle, NULL, (SDL_RendererFlip)flip);
 }
 
 void Sprite::SetTexture(std::shared_ptr<Texture> texture) {

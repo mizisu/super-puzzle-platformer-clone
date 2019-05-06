@@ -3,10 +3,19 @@
 #include "game/block_manager.h"
 #include "game/item.h"
 #include "game/player.h"
+#include "game/string_effect.h"
 #include "game/ui_layer.h"
 #include "game/weapon.h"
 
+InputAdapter input;
+
 GameScene::GameScene() {
+  input.KeyDown([&](auto scancode) {
+    if (scancode == SDL_SCANCODE_P) {
+      CreateItem(10);
+    }
+  });
+
   this->AddChild(std::make_shared<BackgroundLayer>());
   auto block_manager = std::make_shared<BlockManager>();
   this->AddChild(block_manager);
@@ -25,6 +34,8 @@ GameScene::GameScene() {
   block_manager->OnBreakBlock([&](int count) {
     this->ui->AddScore(count * rand.Get(1, 30) * rand.Get(1, 30));
     CreateItem(count);
+    this->AddChild(std::make_shared<StringEffect>(
+        StringEffectType::Score, this->player->X(), this->player->Y()));
   });
 }
 

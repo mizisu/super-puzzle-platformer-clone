@@ -30,8 +30,10 @@ class Physics {
   void CheckCollision();
   void Intersect(Sprite* other);
 
- private:
+ protected:
   double acceleration;
+
+ private:
   double velocity_y;
   double velocity_x;
   bool enable_gravity;

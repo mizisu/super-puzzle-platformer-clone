@@ -22,9 +22,7 @@ class Player : public AnimationSprite, public Physics {
   virtual void Update() override;
   void OnHitByBlock(std::function<void()> func) { hit_by_block = func; }
   int GetEnergy() { return energy; }
-  void AddEnerge(int value) {
-    this->energy = std::min(this->energy + value, 100);
-  }
+  void AddEnerge(int value);
 
  private:
   void Move(double force);
@@ -32,9 +30,11 @@ class Player : public AnimationSprite, public Physics {
   void CollisionBlock(Block* block, const SDL_Rect& result);
   void HitByBlock();
   void Kill();
+  void LevelUp();
 
  public:
   std::function<void()> hit_by_block;
+  int level;
 
  private:
   InputAdapter input_adapter;

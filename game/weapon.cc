@@ -25,7 +25,7 @@ void Weapon::Render() {
 }
 
 void Weapon::Fire() {
-  auto level = std::max(this->player->GetEnergy() / 20, 1);
+  auto level = std::max(this->player->level, 1);
   auto bullet = std::make_shared<Bullet>(level, this->IsFlipHorizontal());
   bullet->X() = this->X();
   if (this->IsFlipHorizontal()) {

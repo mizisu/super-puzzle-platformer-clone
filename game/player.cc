@@ -2,6 +2,7 @@
 #include "base/components/texture_manager.h"
 #include "base/input_adapter.h"
 #include "game/block.h"
+#include "game/string_effect.h"
 
 const double MoveForce = 80;
 const double JumpForce = -180;
@@ -11,7 +12,8 @@ Player::Player()
     : state(PlayerState::Stand),
       texture_stand(nullptr),
       texture_move(nullptr),
-      energy(0) {
+      energy(0),
+      level(1) {
   this->texture_stand =
       TextureManager::GetInstance().GetTexture("play/player/stand.png");
 
@@ -48,6 +50,18 @@ void Player::Update() {
   if (this->energy < 0) this->Kill();
 
   this->EnableGravity(true);
+}
+
+void Player::AddEnerge(int value) {
+  auto after = std::min(this->energy + value, 100);
+  if (this->energy < 25 && after > 25)
+    LevelUp();
+  else if (this->energy < 50 && after > 50)
+    LevelUp();
+  else if (this->energy < 75 && after > 75)
+    LevelUp();
+
+  this->energy = after;
 }
 
 void Player::Move(double force) {
@@ -114,8 +128,16 @@ void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
 
 void Player::HitByBlock() {
   this->energy -= 20;
+  this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerDown,
+                                                this->X(), this->Y()));
   if (this->hit_by_block != nullptr) this->hit_by_block();
   if (this->energy < 0) Kill();
 }
 
 void Player::Kill() {}
+
+void Player::LevelUp() {
+  this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerUp,
+                                                this->X(), this->Y()));
+  level++;
+}
