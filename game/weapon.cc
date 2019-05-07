@@ -28,9 +28,6 @@ void Weapon::Fire() {
   auto level = std::max(this->player->level, 1);
   auto bullet = std::make_shared<Bullet>(level, this->IsFlipHorizontal());
   bullet->X() = this->X();
-  if (this->IsFlipHorizontal()) {
-    this->X() -= XPad;
-  }
   bullet->Y() = this->Y() + YPad - (level * level);
   this->AddChild(bullet);
 }

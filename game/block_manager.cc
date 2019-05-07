@@ -11,7 +11,8 @@ BlockManager::BlockManager() : on_break_block(nullptr) {
 
   // TODO: remove test code
   adapter.KeyDown([&](auto scancode) {
-    if (scancode == SDL_SCANCODE_SPACE) this->CreateNewBlock();
+    if (scancode == SDL_SCANCODE_W) this->CreateNewBlock();
+    if (scancode == SDL_SCANCODE_Q) this->CreateThornBlock();
   });
 }
 

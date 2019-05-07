@@ -23,6 +23,7 @@ class Player : public AnimationSprite, public Physics {
   void OnHitByBlock(std::function<void()> func) { hit_by_block = func; }
   int GetEnergy() { return energy; }
   void AddEnerge(int value);
+  bool IsDead() { return this->energy <= 0; }
 
  private:
   void Move(double force);

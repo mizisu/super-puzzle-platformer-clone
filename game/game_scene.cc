@@ -10,8 +10,9 @@
 InputAdapter input;
 
 GameScene::GameScene() {
+  // TODO: remove test code
   input.KeyDown([&](auto scancode) {
-    if (scancode == SDL_SCANCODE_P) {
+    if (scancode == SDL_SCANCODE_E) {
       CreateItem(10);
     }
   });
@@ -19,11 +20,13 @@ GameScene::GameScene() {
   this->AddChild(std::make_shared<BackgroundLayer>());
   auto block_manager = std::make_shared<BlockManager>();
   this->AddChild(block_manager);
-  auto weapon = std::make_shared<Weapon>();
-  this->AddChild(weapon);
+
   this->player = std::make_shared<Player>();
+  auto weapon = std::make_shared<Weapon>();
   weapon->SetPlayer(player);
+  player->AddChild(weapon);
   this->AddChild(player);
+  
   this->ui = std::make_shared<UiLayer>();
   this->ui->SetEnerge(0);
   this->AddChild(ui);

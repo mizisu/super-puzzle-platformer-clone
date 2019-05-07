@@ -2,6 +2,7 @@
 #include "base/components/texture_manager.h"
 #include "base/input_adapter.h"
 #include "game/block.h"
+#include "game/dead_player.h"
 #include "game/string_effect.h"
 
 const double MoveForce = 80;
@@ -112,6 +113,9 @@ void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
 
   if (this->IsFalling() && is_below_block &&
       player_block_center_dist < player_block_center_dist_max) {
+    if (block->GetBlockType() == BlockType::Thorn) {
+      this->Kill();
+    }
     this->Y() = block->Y() - this->Height();
     this->EnableGravity(false);
     this->state = PlayerState::Stand;
@@ -134,7 +138,14 @@ void Player::HitByBlock() {
   if (this->energy < 0) Kill();
 }
 
-void Player::Kill() {}
+void Player::Kill() {
+  this->energy = 0;
+  this->Erase();
+  auto dead_player = std::make_shared<DeadPlayer>();
+  dead_player->X() = this->X();
+  dead_player->Y() = this->Y();
+  this->GetParent()->AddChild(dead_player);
+}
 
 void Player::LevelUp() {
   this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerUp,
