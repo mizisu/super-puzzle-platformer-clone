@@ -9,7 +9,7 @@
 
 InputAdapter input;
 
-GameScene::GameScene() stage_lock(false) {
+GameScene::GameScene() : stage_lock(false) {
   // TODO: remove test code
   input.KeyDown([&](auto scancode) {
     if (scancode == SDL_SCANCODE_E) {
@@ -44,8 +44,7 @@ GameScene::GameScene() stage_lock(false) {
   timer.SetInterval(
       [&]() {
         if (stage_lock) {
-          
-        }
+                }
       },
       1000);
 }
