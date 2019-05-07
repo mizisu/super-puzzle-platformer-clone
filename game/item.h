@@ -5,10 +5,16 @@
 #include "base/components/physics.h"
 
 class Item : public AnimationSprite, public Physics {
+  using base = AnimationSprite;
+
  public:
   Item(int point);
   virtual ~Item() = default;
   int GetPoint() { return point; }
+  virtual void Update() {
+    base::Update();
+    if (this->Y() > Global::ScreenRealHeight) this->Erase();
+  }
 
  private:
   void Jump();

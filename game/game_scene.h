@@ -13,10 +13,13 @@ class GameScene : public Scene {
 
  private:
   void CreateItem(int count);
+
  private:
   RandomGenerator rand;
   std::shared_ptr<UiLayer> ui;
   std::shared_ptr<Player> player;
+  Timer timer;
+  bool stage_lock;
 };
 
 #endif  // __GAME_SCENE_H__

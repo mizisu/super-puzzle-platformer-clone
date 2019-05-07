@@ -26,7 +26,7 @@ class BlockManager : public Node {
   void UpdateBlock(Block* block, int x, int y);
   void CheckAndSwapBelowBlock(int x, int y);
   bool CanHit(const BlockVistedSet& visited, Block* block, BlockType blockType);
-  void HitConnectedBlock(Block* block);
+  void HitConnectedBlock(Block* block, int level);
   bool HitConnectedBlockInternal(BlockVistedSet& visited, Block* block,
                                  BlockType blockType);
   void EraseBlocks(const BlockVistedSet& visited);

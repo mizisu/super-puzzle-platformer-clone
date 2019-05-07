@@ -27,7 +27,7 @@ class Block : public Physics, public Sprite {
   void SetBlockY(int y);
   void SetBlockPosY(int y);
   int GetBlockY() { return this->block_y; }
-  void OnHitByBullet(std::function<void(Block* block)> func) {
+  void OnHitByBullet(std::function<void(Block* block, int bullet_level)> func) {
     this->on_hit = func;
   }
 
@@ -36,7 +36,7 @@ class Block : public Physics, public Sprite {
   int block_x;
   int block_y;
   int max_y;
-  std::function<void(Block* block)> on_hit;
+  std::function<void(Block* block, int bullet_level)> on_hit;
 };
 
 #endif  // __BLOCK_H__

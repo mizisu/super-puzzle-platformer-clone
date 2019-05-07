@@ -51,15 +51,17 @@ void Player::Update() {
   if (this->energy < 0) this->Kill();
 
   this->EnableGravity(true);
+
+  if (this->Y() > Global::ScreenRealHeight) this->Kill();
 }
 
 void Player::AddEnerge(int value) {
   auto after = std::min(this->energy + value, 100);
-  if (this->energy < 25 && after > 25)
+  if (this->energy <= 25 && after >= 25)
     LevelUp();
-  else if (this->energy < 50 && after > 50)
+  else if (this->energy <= 50 && after >= 50)
     LevelUp();
-  else if (this->energy < 75 && after > 75)
+  else if (this->energy <= 75 && after >= 75)
     LevelUp();
 
   this->energy = after;
@@ -139,7 +141,12 @@ void Player::HitByBlock() {
 }
 
 void Player::Kill() {
+  this->X() = 0;
+  this->Y() = 0;
+  this->dest_rect.w = 0;
+  this->dest_rect.h = 0;
   this->energy = 0;
+  this->EnableGravity(false);
   this->Erase();
   auto dead_player = std::make_shared<DeadPlayer>();
   dead_player->X() = this->X();

@@ -3,7 +3,7 @@
 #include "game/effect.h"
 
 Bullet::Bullet(int level, bool flip) : flip(flip) {
-  level = std::min(level, 4);
+  this->level = std::min(level, 4);
   this->SetTexture("play/player/lv"s + std::to_string(level) + ".png"s);
   this->EnableGravity(false);
   this->FlipHorizontal(flip);

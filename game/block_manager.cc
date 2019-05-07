@@ -63,7 +63,9 @@ void BlockManager::CreateBlock(int x, int y) {
   auto block = std::make_shared<NormalBlock>();
   block->SetBlockPosX(x);
   block->SetBlockPosY(y);
-  block->OnHitByBullet([&](Block* block) { this->HitConnectedBlock(block); });
+  block->OnHitByBullet([&](Block* block, int bullet_level) {
+    this->HitConnectedBlock(block, bullet_level);
+  });
   blocks[x][y] = block.get();
   this->AddChild(block);
 }
@@ -93,12 +95,16 @@ bool BlockManager::CanHit(const BlockVistedSet& visited, Block* block,
   }
 }
 
-void BlockManager::HitConnectedBlock(Block* block) {
+void BlockManager::HitConnectedBlock(Block* block, int bullet_level) {
+  bool hit = false;
   BlockVistedSet visited;
-  visited.resize(MaxBlockColumn);
+  for (int i = 0; i < bullet_level; i++) {
+    visited.clear();
+    visited.resize(MaxBlockColumn);
+    hit =
+        this->HitConnectedBlockInternal(visited, block, block->GetBlockType());
+  }
 
-  bool hit =
-      this->HitConnectedBlockInternal(visited, block, block->GetBlockType());
   if (hit == false) {
     EraseBlocks(visited);
   }

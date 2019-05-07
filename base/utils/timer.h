@@ -21,6 +21,20 @@ class Timer {
     t.detach();
   }
 
+  template <typename func>
+  void SetInterval(func function, int interval) {
+    this->running = true;
+    std::thread t([=]() {
+      while (true) {
+        if (!this->running) return;
+        std::this_thread::sleep_for(std::chrono::milliseconds(interval));
+        if (!this->running) return;
+        function();
+      }
+    });
+    t.detach();
+  }
+
   void Stop() { running = false; }
 
  private:

@@ -9,7 +9,7 @@
 
 InputAdapter input;
 
-GameScene::GameScene() {
+GameScene::GameScene() stage_lock(false) {
   // TODO: remove test code
   input.KeyDown([&](auto scancode) {
     if (scancode == SDL_SCANCODE_E) {
@@ -26,7 +26,7 @@ GameScene::GameScene() {
   weapon->SetPlayer(player);
   player->AddChild(weapon);
   this->AddChild(player);
-  
+
   this->ui = std::make_shared<UiLayer>();
   this->ui->SetEnerge(0);
   this->AddChild(ui);
@@ -40,6 +40,14 @@ GameScene::GameScene() {
     this->AddChild(std::make_shared<StringEffect>(
         StringEffectType::Score, this->player->X(), this->player->Y()));
   });
+
+  timer.SetInterval(
+      [&]() {
+        if (stage_lock) {
+          
+        }
+      },
+      1000);
 }
 
 GameScene::~GameScene() {}
