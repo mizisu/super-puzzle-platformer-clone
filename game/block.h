@@ -12,6 +12,8 @@ enum class BlockType {
 };
 
 class Block : public Physics, public Sprite {
+  using base = Sprite;
+
  public:
   Block();
   virtual ~Block() = default;
@@ -31,12 +33,16 @@ class Block : public Physics, public Sprite {
     this->on_hit = func;
   }
 
+ public:
+  bool init_action_end;
+
  protected:
   BlockType type;
   int block_x;
   int block_y;
   int max_y;
   std::function<void(Block* block, int bullet_level)> on_hit;
+  Timer timer;
 };
 
 #endif  // __BLOCK_H__

@@ -29,10 +29,12 @@ void BlockManager::Update() {
 void BlockManager::CreateDefaultBlocks() {
   for (int i = 0; i < MaxBlockColumn; i++) {
     for (int j = 0; j < MaxBlockRow; j++) {
-      if (j >= MaxBlockRow - 3)
+      if (j >= MaxBlockRow - 3) {
         CreateBlock(i, j);
-      else
+        blocks[i][j]->init_action_end = true;
+      } else {
         blocks[i][j] = nullptr;
+      }
     }
   }
 }
