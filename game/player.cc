@@ -141,6 +141,10 @@ void Player::HitByBlock() {
 }
 
 void Player::Kill() {
+  auto dead_player = std::make_shared<DeadPlayer>();
+  dead_player->X() = this->X();
+  dead_player->Y() = this->Y();
+  this->GetParent()->AddChild(dead_player);
   this->X() = 0;
   this->Y() = 0;
   this->dest_rect.w = 0;
@@ -148,10 +152,6 @@ void Player::Kill() {
   this->energy = 0;
   this->EnableGravity(false);
   this->Erase();
-  auto dead_player = std::make_shared<DeadPlayer>();
-  dead_player->X() = this->X();
-  dead_player->Y() = this->Y();
-  this->GetParent()->AddChild(dead_player);
 }
 
 void Player::LevelUp() {
