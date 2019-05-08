@@ -166,7 +166,7 @@ void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
   int count = 0;
   for (int x = 0; x < visited.size(); x++) {
     for (int y = 0; y < visited[x].size(); y++) {
-      if (!visited[x][y]) continue;
+      if (!visited[x][y] || blocks[x][y] == nullptr) continue;
       ++count;
       blocks[x][y]->Erase();
       blocks[x][y] = nullptr;

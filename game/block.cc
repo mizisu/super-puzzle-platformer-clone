@@ -6,10 +6,14 @@
 const int BlockHeight = 96;
 
 Block::Block()
-    : block_x(0), block_y(0), max_y(0), on_hit(nullptr), init_action_end(false) {
+    : block_x(0),
+      block_y(0),
+      max_y(0),
+      on_hit(nullptr),
+      init_action_end(false) {
   this->Collision([&](auto other, auto result) {
     if (auto bullet = dynamic_cast<Bullet*>(other); bullet != nullptr) {
-      if (this->on_hit != nullptr) this->on_hit(this, bullet->level);
+      if (this->on_hit != nullptr) FireOnHitByBullet(bullet->level);
     }
   });
   this->EnableGravity(false);
@@ -19,7 +23,7 @@ Block::Block()
         this->EnableGravity(true);
         init_action_end = true;
       },
-      1000);
+      500);
 }
 
 void Block::Update() {

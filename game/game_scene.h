@@ -15,9 +15,12 @@ class GameScene : public Scene {
  private:
   void CreateItem(int count);
   void NextStage();
+  void StartStage(std::function<void()> func, int count, int interval);
   void StartDropBlockStage();
   void StartDropThronBlock();
   void StartDropBlockLine();
+  void StartLaser();
+  void StartDropMultipleBlockStage();
 
  private:
   RandomGenerator rand;

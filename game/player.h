@@ -25,13 +25,13 @@ class Player : public AnimationSprite, public Physics {
   void AddEnerge(int value);
   bool IsDead() { return this->energy <= 0; }
   int EnergyToLevel();
+  void Kill();
 
  private:
   void Move(double force);
   void Jump();
   void CollisionBlock(Block* block, const SDL_Rect& result);
   void HitByBlock();
-  void Kill();
   void LevelUp();
 
  public:

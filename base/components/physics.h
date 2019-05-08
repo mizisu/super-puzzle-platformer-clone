@@ -33,7 +33,7 @@ class Physics {
  protected:
   double acceleration;
 
- protected:
+ private:
   double velocity_x;
   double velocity_y;
   bool enable_gravity;

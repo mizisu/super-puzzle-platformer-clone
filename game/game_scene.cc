@@ -2,6 +2,7 @@
 #include "game/background_layer.h"
 #include "game/block_manager.h"
 #include "game/item.h"
+#include "game/laser.h"
 #include "game/player.h"
 #include "game/string_effect.h"
 #include "game/ui_layer.h"
@@ -14,6 +15,10 @@ GameScene::GameScene() : stage_lock(false), stage(0) {
   input.KeyDown([&](auto scancode) {
     if (scancode == SDL_SCANCODE_E) {
       CreateItem(10);
+    }
+
+    if (scancode == SDL_SCANCODE_R) {
+      this->StartLaser();
     }
   });
 
@@ -66,37 +71,58 @@ void GameScene::CreateItem(int count) {
 
 void GameScene::NextStage() {
   stage++;
+  if (stage >= 6) {
+    stage = 6;
+    stage = rand.Get(1, 6);
+  }
+
   if (stage == 1) {
     this->StartDropBlockStage();
   } else if (stage == 2) {
     this->StartDropThronBlock();
   } else if (stage == 3) {
     this->StartDropBlockLine();
+  } else if (stage == 4) {
+    this->StartLaser();
+  } else if (stage == 5) {
+    this->StartDropMultipleBlockStage();
   }
+}
+
+void GameScene::StartStage(std::function<void()> func, int count,
+                           int interval) {
+  stage_lock = true;
+
+  for (int i = 0; i < count; i++) {
+    timer.SetTimeout(func, i * interval);
+  }
+
+  timer.SetTimeout([&]() { this->stage_lock = false; },
+                   (count * interval) + 500);
 }
 
 void GameScene::StartDropBlockStage() {
-  stage_lock = true;
-  for (int i = 1; i <= 6; i++) {
-    timer.SetTimeout([&]() { block_manager->CreateNewBlock(); }, 2000 * i);
-  }
-  timer.SetTimeout([&]() { this->stage_lock = false; }, 14000);
+  StartStage([&]() { block_manager->CreateNewBlock(); }, 6, 2000);
 }
 
 void GameScene::StartDropThronBlock() {
-  for (int i = 1; i <= 2; i++) {
-    timer.SetTimeout([&]() { block_manager->CreateThornBlock(); }, 3000 * i);
-  }
+  StartStage([&]() { block_manager->CreateThornBlock(); }, 2, 2000);
 }
 
 void GameScene::StartDropBlockLine() {
-  for (int i = 1; i <= 2; i++) {
-    timer.SetTimeout(
-        [&]() {
-          for (size_t i = 1; i <= MaxBlockColumn - 3; i++) {
-            block_manager->CreateNewBlock();
-          }
-        },
-        7000 * i);
-  }
+  StartStage(
+      [&]() {
+        for (size_t i = 1; i <= MaxBlockColumn - 3; i++) {
+          block_manager->CreateNewBlock();
+        }
+      },
+      3, 4000);
+}
+
+void GameScene::StartLaser() {
+  StartStage([&]() { this->AddChild(std::make_shared<Laser>()); }, 2, 4000);
+}
+
+void GameScene::StartDropMultipleBlockStage() {
+  StartStage([&]() { block_manager->CreateNewBlock(); }, 20, 500);
 }

@@ -130,10 +130,9 @@ void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
 }
 
 void Player::HitByBlock() {
-  this->energy -= 25;
-  if (this->energy)
-    this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerDown,
-                                                  this->X(), this->Y()));
+  this->energy -= 10;
+  this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerDown,
+                                                this->X(), this->Y()));
   if (this->hit_by_block != nullptr) this->hit_by_block();
   if (this->energy < 0) Kill();
 }

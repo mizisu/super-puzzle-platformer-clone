@@ -32,6 +32,9 @@ class Block : public Physics, public Sprite {
   void OnHitByBullet(std::function<void(Block* block, int bullet_level)> func) {
     this->on_hit = func;
   }
+  void FireOnHitByBullet(int bullet_level) {
+    this->on_hit(this, bullet_level);
+  }
 
  public:
   bool init_action_end;
