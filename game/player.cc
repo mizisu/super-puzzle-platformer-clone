@@ -13,8 +13,7 @@ Player::Player()
     : state(PlayerState::Stand),
       texture_stand(nullptr),
       texture_move(nullptr),
-      energy(0),
-      level(1) {
+      energy(0) {
   this->texture_stand =
       TextureManager::GetInstance().GetTexture("play/player/stand.png");
 
@@ -56,16 +55,14 @@ void Player::Update() {
 }
 
 void Player::AddEnerge(int value) {
-  auto after = std::min(this->energy + value, 100);
-  if (this->energy <= 25 && after >= 25)
-    LevelUp();
-  else if (this->energy <= 50 && after >= 50)
-    LevelUp();
-  else if (this->energy <= 75 && after >= 75)
-    LevelUp();
+  auto before_level = this->EnergyToLevel();
+  this->energy = std::min(this->energy + value, Global::PlayerMaxEnergy);
+  auto current_level = this->EnergyToLevel();
 
-  this->energy = after;
+  if (before_level != current_level) LevelUp();
 }
+
+int Player::EnergyToLevel() { return Global::EnergyToLevel(this->energy); }
 
 void Player::Move(double force) {
   this->X() += force * Global::DeltaTime;
@@ -133,9 +130,10 @@ void Player::CollisionBlock(Block* block, const SDL_Rect& result) {
 }
 
 void Player::HitByBlock() {
-  this->energy -= 20;
-  this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerDown,
-                                                this->X(), this->Y()));
+  this->energy -= 25;
+  if (this->energy)
+    this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerDown,
+                                                  this->X(), this->Y()));
   if (this->hit_by_block != nullptr) this->hit_by_block();
   if (this->energy < 0) Kill();
 }
@@ -157,5 +155,4 @@ void Player::Kill() {
 void Player::LevelUp() {
   this->AddChild(std::make_shared<StringEffect>(StringEffectType::PowerUp,
                                                 this->X(), this->Y()));
-  level++;
 }

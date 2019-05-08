@@ -9,7 +9,7 @@
 
 InputAdapter input;
 
-GameScene::GameScene() : stage_lock(false) {
+GameScene::GameScene() : stage_lock(false), stage(0) {
   // TODO: remove test code
   input.KeyDown([&](auto scancode) {
     if (scancode == SDL_SCANCODE_E) {
@@ -18,8 +18,8 @@ GameScene::GameScene() : stage_lock(false) {
   });
 
   this->AddChild(std::make_shared<BackgroundLayer>());
-  auto block_manager = std::make_shared<BlockManager>();
-  this->AddChild(block_manager);
+  this->block_manager = std::make_shared<BlockManager>();
+  this->AddChild(this->block_manager);
 
   this->player = std::make_shared<Player>();
   auto weapon = std::make_shared<Weapon>();
@@ -43,8 +43,9 @@ GameScene::GameScene() : stage_lock(false) {
 
   timer.SetInterval(
       [&]() {
-        if (stage_lock) {
-                }
+        if (!stage_lock) {
+          this->NextStage();
+        }
       },
       1000);
 }
@@ -60,5 +61,42 @@ void GameScene::CreateItem(int count) {
       }
     });
     this->AddChild(item);
+  }
+}
+
+void GameScene::NextStage() {
+  stage++;
+  if (stage == 1) {
+    this->StartDropBlockStage();
+  } else if (stage == 2) {
+    this->StartDropThronBlock();
+  } else if (stage == 3) {
+    this->StartDropBlockLine();
+  }
+}
+
+void GameScene::StartDropBlockStage() {
+  stage_lock = true;
+  for (int i = 1; i <= 6; i++) {
+    timer.SetTimeout([&]() { block_manager->CreateNewBlock(); }, 2000 * i);
+  }
+  timer.SetTimeout([&]() { this->stage_lock = false; }, 14000);
+}
+
+void GameScene::StartDropThronBlock() {
+  for (int i = 1; i <= 2; i++) {
+    timer.SetTimeout([&]() { block_manager->CreateThornBlock(); }, 3000 * i);
+  }
+}
+
+void GameScene::StartDropBlockLine() {
+  for (int i = 1; i <= 2; i++) {
+    timer.SetTimeout(
+        [&]() {
+          for (size_t i = 1; i <= MaxBlockColumn - 3; i++) {
+            block_manager->CreateNewBlock();
+          }
+        },
+        7000 * i);
   }
 }

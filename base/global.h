@@ -11,6 +11,9 @@ const int LeftPad = 96;
 const int TopPad = -60;
 const int RightEnd = ScreenRealWidth - LeftPad;
 
+const int PlayerMinEnergy = 0;
+const int PlayerMaxEnergy = 120;
+
 extern SDL_Window* Window;
 extern SDL_Surface* ScreenSurface;
 extern SDL_Renderer* Renderer;
@@ -18,6 +21,7 @@ extern SDL_Renderer* Renderer;
 extern double DeltaTime;
 
 void Log(const std::string_view& str);
+int EnergyToLevel(int energy);
 
 template <typename T>
 void SafeDelete(T* obj) {

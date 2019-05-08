@@ -10,10 +10,12 @@ class BarSprite : public Sprite {
     this->max = max;
   }
   void SetValue(int value);
+  int GetValue() { return value; }
 
  private:
   int min;
   int max;
+  int value;
 };
 
 #endif  // __BAR_SPRITE_H__

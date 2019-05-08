@@ -30,6 +30,9 @@ class DeadPlayer : public Sprite {
     this->angle += delta_angle * Global::DeltaTime;
     this->dest_rect.w += delta_size * Global::DeltaTime;
     this->dest_rect.h += delta_size * Global::DeltaTime;
+    this->X() +=
+        ((Global::ScreenRealWidth / 2) - this->X() - (this->Width() / 2)) *
+        Global::DeltaTime;
     this->Y() += (dest_y - this->Y()) * Global::DeltaTime;
   }
 

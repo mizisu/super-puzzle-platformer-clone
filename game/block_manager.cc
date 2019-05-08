@@ -41,9 +41,10 @@ void BlockManager::CreateDefaultBlocks() {
 
 void BlockManager::CreateNewBlock() {
   int x = random.Get(0, MaxBlockColumn);
-  if (this->blocks[x][0] == nullptr) {
-    this->CreateBlock(x, 0);
+  while (this->blocks[x][0] != nullptr) {
+    x = random.Get(0, MaxBlockColumn);
   }
+  this->CreateBlock(x, 0);
 }
 
 void BlockManager::CreateThornBlock() {
@@ -87,9 +88,13 @@ void BlockManager::CheckAndSwapBelowBlock(int x, int y) {
 
 bool BlockManager::CanHit(const BlockVistedSet& visited, Block* block,
                           BlockType blockType) {
-  if (block == nullptr || block->GetBlockType() != blockType ||
-      block->IsFalling())
-    return false;
+  if (block == nullptr) return false;
+
+  bool can_hit_block_type = block->GetBlockType() == blockType ||
+                            block->GetBlockType() == BlockType::Thorn;
+
+  if (!can_hit_block_type || block->IsFalling()) return false;
+   
   auto x = block->GetBlockX();
   auto y = block->GetBlockY();
   if (!visited[x][y]) {
@@ -119,6 +124,11 @@ bool BlockManager::HitConnectedBlockInternal(BlockVistedSet& visited,
                                              BlockType blockType) {
   auto x = block->GetBlockX();
   auto y = block->GetBlockY();
+
+  if (block->GetBlockType() == BlockType::Thorn) {
+    visited[x][y] = true;
+    return false;
+  }
 
   visited[x][y] = true;
 

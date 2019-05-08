@@ -24,6 +24,7 @@ class Player : public AnimationSprite, public Physics {
   int GetEnergy() { return energy; }
   void AddEnerge(int value);
   bool IsDead() { return this->energy <= 0; }
+  int EnergyToLevel();
 
  private:
   void Move(double force);
@@ -35,13 +36,14 @@ class Player : public AnimationSprite, public Physics {
 
  public:
   std::function<void()> hit_by_block;
-  int level;
 
  private:
   InputAdapter input_adapter;
   PlayerState state;
   std::shared_ptr<Texture> texture_stand;
   std::shared_ptr<Texture> texture_move;
+
+ public:
   int energy;
 };
 
