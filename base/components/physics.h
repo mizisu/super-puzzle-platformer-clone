@@ -33,9 +33,9 @@ class Physics {
  protected:
   double acceleration;
 
- private:
-  double velocity_y;
+ protected:
   double velocity_x;
+  double velocity_y;
   bool enable_gravity;
   std::vector<CollisionFunc> collision_functions;
   Sprite* sprite;

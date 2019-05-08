@@ -46,9 +46,9 @@ Sprite* Physics::GetSprite() {
 void Physics::UpdatePosition() {
   if (this->enable_gravity) {
     this->velocity_y += acceleration;
-    this->GetSprite()->Y() += this->velocity_y * Global::DeltaTime;
   }
-  this->GetSprite()->X() += velocity_x * Global::DeltaTime;
+  this->GetSprite()->X() += this->velocity_x * Global::DeltaTime;
+  this->GetSprite()->Y() += this->velocity_y * Global::DeltaTime;
   velocity_x *= 0.9;
 }
 
