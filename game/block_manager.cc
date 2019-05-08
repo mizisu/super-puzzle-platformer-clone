@@ -87,7 +87,9 @@ void BlockManager::CheckAndSwapBelowBlock(int x, int y) {
 
 bool BlockManager::CanHit(const BlockVistedSet& visited, Block* block,
                           BlockType blockType) {
-  if (block == nullptr || block->GetBlockType() != blockType) return false;
+  if (block == nullptr || block->GetBlockType() != blockType ||
+      block->IsFalling())
+    return false;
   auto x = block->GetBlockX();
   auto y = block->GetBlockY();
   if (!visited[x][y]) {
