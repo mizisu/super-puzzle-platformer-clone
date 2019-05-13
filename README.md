@@ -2,7 +2,8 @@
 ## Coding this clone
 https://store.steampowered.com/app/238530/Super_Puzzle_Platformer_Deluxe/
 
-![](./res/screenshot/img01.jpg)
+<img src="./res/screenshot/img01.jpg" width="410px" height="600px" />
+
 ![](./res/screenshot/01.gif)
 ![](./res/screenshot/02.gif)
 ![](./res/screenshot/03.gif)
