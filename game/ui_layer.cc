@@ -48,4 +48,6 @@ void UiLayer::Update() {
 
 void UiLayer::AddScore(long num) { this->score->Add(num); }
 
+long UiLayer::GetScore() { return this->score->score; }
+
 void UiLayer::SetEnerge(int value) { this->lvbar->SetValue(value); }

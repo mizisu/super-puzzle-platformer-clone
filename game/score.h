@@ -12,9 +12,13 @@ class Score : public Node {
   virtual ~Score() = default;
   virtual void Update() override;
   void Add(long num);
+  void MoveY(int y);
+
+ public:
+  long score;
 
  private:
-  long score;
+  int y;
   long current_score;
   RandomGenerator rand;
   std::vector<std::shared_ptr<Texture>> textures;

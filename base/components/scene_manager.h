@@ -4,11 +4,17 @@
 #include "base/components/scene.h"
 
 class SceneManager {
- public:
+ private:
   SceneManager();
+
+ public:
   ~SceneManager();
   void Push(Scene* scene);
   void Play();
+  static auto& GetInstance() {
+    static SceneManager instance;
+    return instance;
+  }
 
  private:
   Scene* current_scene;

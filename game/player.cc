@@ -149,6 +149,7 @@ void Player::Kill() {
   this->energy = 0;
   this->EnableGravity(false);
   this->Erase();
+  if(on_erase != nullptr) on_erase();
 }
 
 void Player::LevelUp() {

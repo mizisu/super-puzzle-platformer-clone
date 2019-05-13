@@ -35,8 +35,7 @@ bool Application::Initialize() {
     Global::Renderer = renderer;
     Global::ScreenSurface = SDL_GetWindowSurface(window);
 
-    scene_manager = std::make_unique<SceneManager>();
-    scene_manager->Push(new GameScene());
+    SceneManager::GetInstance().Push(new GameScene());
 
     Input::GetInstance().Initialize();
 
@@ -67,7 +66,7 @@ void Application::Run() {
 
     SDL_RenderClear(Global::Renderer);
     UpdateDeltaTime();
-    scene_manager->Play();
+    SceneManager::GetInstance().Play();
     SDL_RenderPresent(Global::Renderer);
     SDL_Delay(16);
   }

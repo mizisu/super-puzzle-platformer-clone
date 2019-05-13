@@ -25,7 +25,6 @@ Laser::Laser() {
   this->Collision([&](auto other, auto result) {
     if (auto block = dynamic_cast<Block*>(other); block != nullptr) {
       if (on_hit_block != nullptr) on_hit_block(block);
-      std::cout << block->GetBlockX() << " " << block->GetBlockY() << "\n";
     } else if (auto player = dynamic_cast<Player*>(other); player != nullptr) {
       player->Kill();
     }

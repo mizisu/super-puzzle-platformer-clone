@@ -36,6 +36,7 @@ class Player : public AnimationSprite, public Physics {
 
  public:
   std::function<void()> hit_by_block;
+  std::function<void()> on_erase;
 
  private:
   InputAdapter input_adapter;

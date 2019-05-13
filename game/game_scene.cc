@@ -1,13 +1,14 @@
 #include "game/game_scene.h"
+#include "base/components/scene_manager.h"
 #include "game/background_layer.h"
 #include "game/block_manager.h"
 #include "game/item.h"
 #include "game/laser.h"
 #include "game/player.h"
+#include "game/score_scene.h"
 #include "game/string_effect.h"
 #include "game/ui_layer.h"
 #include "game/weapon.h"
-
 InputAdapter input;
 
 GameScene::GameScene() : stage_lock(false), stage(0) {
@@ -53,6 +54,15 @@ GameScene::GameScene() : stage_lock(false), stage(0) {
         }
       },
       1000);
+
+  this->player->on_erase = [&]() {
+    timer.SetInterval(
+        [&]() {
+          SceneManager::GetInstance().Push(
+              new ScoreScene(this->ui->GetScore()));
+        },
+        3000);
+  };
 }
 
 GameScene::~GameScene() {}

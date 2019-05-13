@@ -10,7 +10,6 @@ void SceneManager::Push(Scene* scene) {
   if (current_scene) current_scene->Clear();
   Global::SafeDelete(current_scene);
   if (scene) {
-    scene->SetSceneManager(this);
     current_scene = scene;
   }
 }

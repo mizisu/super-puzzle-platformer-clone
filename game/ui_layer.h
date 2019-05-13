@@ -13,6 +13,7 @@ class UiLayer : public Node {
   virtual ~UiLayer() = default;
   virtual void Update() override;
   void AddScore(long num);
+  long GetScore();
   void SetEnerge(int value);
 
  private:

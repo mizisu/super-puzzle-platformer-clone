@@ -4,8 +4,6 @@
 
 #include "base/base.h"
 
-class SceneManager;
-
 class Application {
  public:
   Application();
@@ -16,9 +14,6 @@ class Application {
  private:
   void Close();
   void UpdateDeltaTime();
-
- private:
-  std::unique_ptr<SceneManager> scene_manager;
 };
 
 #endif  // __APPLICATION_H__

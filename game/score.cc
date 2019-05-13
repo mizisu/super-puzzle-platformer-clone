@@ -13,6 +13,7 @@ Score::Score() : score(0), current_score(0) {
     sp->DestRect().h *= 0.9;
     sp->X() = 755 - ((sp->Width() + 3) * i);
     sp->Y() = 1225;
+    this->MoveY(1225);
 
     this->AddChild(sp);
     this->sprites.push_back(sp);
@@ -20,6 +21,9 @@ Score::Score() : score(0), current_score(0) {
 }
 
 void Score::Update() {
+  for (auto& sp : this->sprites) {
+    sp->Y() += (this->y - sp->Y()) * Global::DeltaTime * 0.1;
+  }
   if (this->current_score < this->score) {
     this->current_score += rand.Get(1, 100);
     this->current_score = std::min(this->current_score, this->score);
@@ -41,3 +45,5 @@ void Score::Add(long num) {
   this->score += num;
   this->score = std::min(this->score, 9999999999);
 }
+
+void Score::MoveY(int y) { this->y = y; }
