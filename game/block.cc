@@ -13,7 +13,7 @@ Block::Block()
       init_action_end(false) {
   this->Collision([&](auto other, auto result) {
     if (auto bullet = dynamic_cast<Bullet*>(other); bullet != nullptr) {
-      if (this->on_hit != nullptr) FireOnHitByBullet(bullet->level);
+      FireOnHitByBullet(bullet->level);
     }
   });
   this->EnableGravity(false);

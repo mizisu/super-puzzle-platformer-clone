@@ -13,7 +13,9 @@ class RandomGenerator {
   */
   int Get(int min, int max);
  private:
-  std::random_device rand;
+  static std::random_device rand;
 };
+
+
 
 #endif // __RANDOM_GENERATOR_H__

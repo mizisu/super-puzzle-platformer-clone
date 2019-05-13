@@ -1,6 +1,8 @@
 #include "base/utils/random_generator.h"
 #include <random>
 
+std::random_device RandomGenerator::rand;
+
 RandomGenerator::RandomGenerator() {}
 
 RandomGenerator::~RandomGenerator() {}

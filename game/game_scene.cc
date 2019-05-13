@@ -16,9 +16,9 @@ GameScene::GameScene() : stage_lock(false), stage(0) {
     if (scancode == SDL_SCANCODE_E) {
       CreateItem(10);
     }
-
     if (scancode == SDL_SCANCODE_R) {
-      this->StartLaser();
+      timer.SetInterval([&]() { this->StartLaser(); }, 4000);
+      timer.SetInterval([&]() { this->StartDropBlockLine(); }, 4000);
     }
   });
 
@@ -120,7 +120,15 @@ void GameScene::StartDropBlockLine() {
 }
 
 void GameScene::StartLaser() {
-  StartStage([&]() { this->AddChild(std::make_shared<Laser>()); }, 2, 4000);
+  StartStage(
+      [&]() {
+        auto laser = std::make_shared<Laser>();
+        laser->on_hit_block = [&](Block* block) {
+          this->block_manager->EraseBlocks(std::vector<Block*>{block});
+        };
+        this->AddChild(laser);
+      },
+      2, 4000);
 }
 
 void GameScene::StartDropMultipleBlockStage() {

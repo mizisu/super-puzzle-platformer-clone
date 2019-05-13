@@ -94,7 +94,7 @@ bool BlockManager::CanHit(const BlockVistedSet& visited, Block* block,
                             block->GetBlockType() == BlockType::Thorn;
 
   if (!can_hit_block_type || block->IsFalling()) return false;
-   
+
   auto x = block->GetBlockX();
   auto y = block->GetBlockY();
   if (!visited[x][y]) {
@@ -162,16 +162,29 @@ bool BlockManager::HitConnectedBlockInternal(BlockVistedSet& visited,
   return false;
 }
 
-void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
-  int count = 0;
-  for (int x = 0; x < visited.size(); x++) {
-    for (int y = 0; y < visited[x].size(); y++) {
-      if (!visited[x][y] || blocks[x][y] == nullptr) continue;
-      ++count;
+void BlockManager::EraseBlocks(std::vector<Block*> vec_blocks) {
+  for (auto block : vec_blocks) {
+    int x = block->GetBlockX();
+    int y = block->GetBlockY();
+    if (blocks[x][y] != nullptr) {
       blocks[x][y]->Erase();
       blocks[x][y] = nullptr;
     }
   }
-  Camera::GetInstance().Shake(std::min(count * 5, 30), 500);
-  if (this->on_break_block != nullptr) on_break_block(count);
+  Camera::GetInstance().Shake(
+      std::min(static_cast<int>(vec_blocks.size()) * 5, 30), 500);
+  if (this->on_break_block != nullptr) on_break_block(vec_blocks.size());
+}
+
+void BlockManager::EraseBlocks(const BlockVistedSet& visited) {
+  int count = 0;
+  std::vector<Block*> vec_blocks;
+  for (int x = 0; x < visited.size(); x++) {
+    for (int y = 0; y < visited[x].size(); y++) {
+      if (!visited[x][y] || blocks[x][y] == nullptr) continue;
+      ++count;
+      vec_blocks.push_back(blocks[x][y]);
+    }
+  }
+  this->EraseBlocks(vec_blocks);
 }

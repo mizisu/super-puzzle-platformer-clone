@@ -17,6 +17,7 @@ class BlockManager : public Node {
   void CreateNewBlock();
   void CreateThornBlock();
   void OnBreakBlock(std::function<void(int)> func) { on_break_block = func; }
+  void EraseBlocks(std::vector<Block*> blocks);
 
   auto& Blocks() { return blocks; }
 

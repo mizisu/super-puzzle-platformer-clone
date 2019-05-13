@@ -33,7 +33,7 @@ class Block : public Physics, public Sprite {
     this->on_hit = func;
   }
   void FireOnHitByBullet(int bullet_level) {
-    this->on_hit(this, bullet_level);
+    if (this->on_hit != nullptr) this->on_hit(this, bullet_level);
   }
 
  public:

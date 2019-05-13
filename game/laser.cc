@@ -24,15 +24,14 @@ Laser::Laser() {
 
   this->Collision([&](auto other, auto result) {
     if (auto block = dynamic_cast<Block*>(other); block != nullptr) {
-      block->FireOnHitByBullet(4);
+      if (on_hit_block != nullptr) on_hit_block(block);
+      std::cout << block->GetBlockX() << " " << block->GetBlockY() << "\n";
     } else if (auto player = dynamic_cast<Player*>(other); player != nullptr) {
       player->Kill();
     }
   });
 
-  timer.SetTimeout([&]() {
-    this->Erase();
-  }, 4000);
+  timer.SetTimeout([&]() { this->Erase(); }, 4000);
 }
 
 void Laser::Update() {
