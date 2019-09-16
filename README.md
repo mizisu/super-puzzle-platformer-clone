@@ -1,6 +1,4 @@
 # Super Puzzle Platformer Deluxe Cloning
-## Original
-https://store.steampowered.com/app/238530/Super_Puzzle_Platformer_Deluxe/
 
 ## Screenshot
 <img src="./res/screenshot/img01.jpg" width="410px" height="600px" />
